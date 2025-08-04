@@ -1,5 +1,7 @@
 import React from 'react';
 import { typographyClasses, colorClasses } from '../../utils/typography';
+import { useSmoothScroll } from '../hooks/useSmoothScroll';
+
 
 interface Project {
   id: string;

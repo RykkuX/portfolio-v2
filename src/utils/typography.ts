@@ -9,26 +9,26 @@ export const typographyClasses = {
   h5: 'text-h5 font-roboto-mono font-bold',
   h6: 'text-h6 font-roboto-mono font-bold',
   
-  // Mobile Heading classes with Roboto Mono font
-  mobileH1: 'text-mobile-h1 font-roboto-mono font-bold',
-  mobileH2: 'text-mobile-h2 font-roboto-mono font-bold',
-  mobileH3: 'text-mobile-h3 font-roboto-mono font-bold',
+  // Mobile Heading classes with Roboto Mono font (shifted down one level)
+  mobileH1: 'text-mobile-h1 font-roboto-mono font-bold', // Desktop h5 size
+  mobileH2: 'text-mobile-h2 font-roboto-mono font-bold', // Desktop h6 size
+  mobileH3: 'text-mobile-h3 font-roboto-mono font-bold', // Desktop body-lg size with bold
   
   // Medium screen Heading classes (md: breakpoint)
-  mediumH1: 'text-h4 font-roboto-mono font-bold', // Desktop h4 size
-  mediumH2: 'text-h5 font-roboto-mono font-bold', // Desktop h5 size
-  mediumH3: 'text-h6 font-roboto-mono font-bold', // Desktop h6 size
-  mediumH4: 'text-mobile-h1 font-roboto-mono font-bold', // Mobile h1 size
-  mediumH5: 'text-mobile-h2 font-roboto-mono font-bold', // Mobile h2 size
-  mediumH6: 'text-mobile-h3 font-roboto-mono font-bold', // Mobile h3 size
+  mediumH1: 'text-medium-h1 font-roboto-mono font-bold', // Desktop h2 size
+  mediumH2: 'text-medium-h2 font-roboto-mono font-bold', // Desktop h3 size
+  mediumH3: 'text-medium-h3 font-roboto-mono font-bold', // Desktop h4 size
+  mediumH4: 'text-medium-h4 font-roboto-mono font-bold', // Desktop h5 size
+  mediumH5: 'text-medium-h5 font-roboto-mono font-bold', // Desktop h6 size
+  mediumH6: 'text-medium-h6 font-roboto-mono font-bold', // Desktop body-lg size with bold
   
   // Responsive Heading classes (mobile-first with medium breakpoint)
-  responsiveH1: 'text-mobile-h1 md:text-h4 lg:text-h1 font-roboto-mono font-bold',
-  responsiveH2: 'text-mobile-h2 md:text-h5 lg:text-h2 font-roboto-mono font-bold',
-  responsiveH3: 'text-mobile-h3 md:text-h6 lg:text-h3 font-roboto-mono font-bold',
-  responsiveH4: 'text-mobile-h3 md:text-mobile-h1 lg:text-h4 font-roboto-mono font-bold',
-  responsiveH5: 'text-mobile-h2 md:text-mobile-h2 lg:text-h5 font-roboto-mono font-bold',
-  responsiveH6: 'text-mobile-h1 md:text-mobile-h3 lg:text-h6 font-roboto-mono font-bold',
+  responsiveH1: 'text-mobile-h1 md:text-medium-h1 lg:text-h1 font-roboto-mono font-bold',
+  responsiveH2: 'text-mobile-h2 md:text-medium-h2 lg:text-h2 font-roboto-mono font-bold',
+  responsiveH3: 'text-mobile-h3 md:text-medium-h3 lg:text-h3 font-roboto-mono font-bold',
+  responsiveH4: 'text-mobile-h3 md:text-medium-h4 lg:text-h4 font-roboto-mono font-bold',
+  responsiveH5: 'text-mobile-h2 md:text-medium-h5 lg:text-h5 font-roboto-mono font-bold',
+  responsiveH6: 'text-mobile-h1 md:text-medium-h6 lg:text-h6 font-roboto-mono font-bold',
   
   // Desktop Body text classes with Inter font
   bodyLg: 'text-body-lg font-inter',
@@ -43,28 +43,28 @@ export const typographyClasses = {
   mobileCaption: 'text-mobile-caption font-inter',
   
   // Medium screen Body text classes (md: breakpoint)
-  mediumBodyLg: 'text-body font-inter', // Desktop body size
-  mediumBody: 'text-mobile-body-lg font-inter', // Mobile body-lg size
-  mediumLink: 'text-body font-inter', // Desktop body size
-  mediumCaption: 'text-mobile-body font-inter', // Mobile body size
+  mediumBodyLg: 'text-medium-body-lg font-inter',
+  mediumBody: 'text-medium-body font-inter',
+  mediumLink: 'text-medium-link font-inter',
+  mediumCaption: 'text-medium-caption font-inter',
   
   // Enhanced Responsive Body text classes (mobile-first with medium breakpoint)
-  responsiveBodyLg: 'text-mobile-body-lg md:text-body lg:text-body-lg font-inter',
-  responsiveBody: 'text-mobile-body md:text-mobile-body-lg lg:text-body font-inter',
-  responsiveLink: 'text-mobile-link md:text-body lg:text-link font-inter',
-  responsiveCaption: 'text-mobile-caption md:text-mobile-body lg:text-caption font-inter',
+  responsiveBodyLg: 'text-mobile-body-lg md:text-medium-body-lg lg:text-body-lg font-inter',
+  responsiveBody: 'text-mobile-body md:text-medium-body lg:text-body font-inter',
+  responsiveLink: 'text-mobile-link md:text-medium-link lg:text-link font-inter',
+  responsiveCaption: 'text-mobile-caption md:text-medium-caption lg:text-caption font-inter',
   
   // Code/monospace classes
   code: 'font-roboto-mono',
   mono: 'font-roboto-mono',
   
   // Specialized responsive classes for different use cases
-  heroTitle: 'text-mobile-h1 md:text-h4 lg:text-h1 xl:text-h1 font-roboto-mono font-bold leading-tight',
-  sectionTitle: 'text-mobile-h2 md:text-h5 lg:text-h2 font-roboto-mono font-bold',
-  cardTitle: 'text-mobile-h3 md:text-h6 lg:text-h4 font-roboto-mono font-bold',
-  navigation: 'text-mobile-link md:text-body lg:text-link font-inter font-medium',
-  button: 'text-mobile-body md:text-body lg:text-link font-inter font-medium',
-  footer: 'text-mobile-caption md:text-mobile-body lg:text-caption font-inter',
+  heroTitle: 'text-mobile-h1 md:text-medium-h1 lg:text-h1 xl:text-h1 font-roboto-mono font-bold leading-tight',
+  sectionTitle: 'text-mobile-h2 md:text-medium-h2 lg:text-h2 font-roboto-mono font-bold',
+  cardTitle: 'text-mobile-h3 md:text-medium-h3 lg:text-h4 font-roboto-mono font-bold',
+  navigation: 'text-mobile-link md:text-medium-link lg:text-link font-inter font-medium',
+  button: 'text-mobile-body md:text-medium-body lg:text-link font-inter font-medium',
+  footer: 'text-mobile-caption md:text-medium-caption lg:text-caption font-inter',
 } as const;
 
 export const colorClasses = {
@@ -132,4 +132,4 @@ export const combinedClasses = {
   
   // Footer
   footerText: `${typographyClasses.footer} ${colorClasses.muted} ${spacingClasses.captionSpacing}`,
-} as const; 
+} as const;

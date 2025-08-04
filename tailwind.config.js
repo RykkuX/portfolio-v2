@@ -29,16 +29,28 @@ module.exports = {
         'body': ['16px', { lineHeight: '24px', letterSpacing: '0.1px', fontWeight: '400' }],
         'caption': ['13px', { lineHeight: '21px', letterSpacing: '0.1px', fontWeight: '400' }],
 
-        // Mobile-specific scaled values (for sm: breakpoint and below)
-        'mobile-h1': ['73px', { lineHeight: '80px', letterSpacing: '-1.5px', fontWeight: '700' }], // Desktop h4
-        'mobile-h2': ['55px', { lineHeight: '61px', letterSpacing: '-1.1px', fontWeight: '700' }], // Desktop h5
-        'mobile-h3': ['41px', { lineHeight: '45px', letterSpacing: '-0.8px', fontWeight: '700' }], // Desktop h6
-        'mobile-body-lg': ['24px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '400' }],
-        'mobile-link': ['16px', { lineHeight: '24px', letterSpacing: '0.1px', fontWeight: '400' }],
-        'mobile-body': ['15px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '400' }],
-        'mobile-caption': ['12px', { lineHeight: '20px', letterSpacing: '0.1px', fontWeight: '400' }],
+        // Medium screen values (md: breakpoint - intermediate sizing)
+        'medium-h1': ['132px', { lineHeight: '145px', letterSpacing: '-2.6px', fontWeight: '700' }], // Desktop h2
+        'medium-h2': ['99px', { lineHeight: '109px', letterSpacing: '-2px', fontWeight: '700' }], // Desktop h3
+        'medium-h3': ['73px', { lineHeight: '80px', letterSpacing: '-1.5px', fontWeight: '700' }], // Desktop h4
+        'medium-h4': ['55px', { lineHeight: '61px', letterSpacing: '-1.1px', fontWeight: '700' }], // Desktop h5
+        'medium-h5': ['41px', { lineHeight: '45px', letterSpacing: '-0.8px', fontWeight: '700' }], // Desktop h6
+        'medium-h6': ['30px', { lineHeight: '39px', letterSpacing: '-0.4px', fontWeight: '700' }], // Desktop body-lg size with bold
+        'medium-body-lg': ['24px', { lineHeight: '32px', letterSpacing: '-0.2px', fontWeight: '400' }],
+        'medium-link': ['17px', { lineHeight: '26px', letterSpacing: '0.1px', fontWeight: '400' }], // Desktop link
+        'medium-body': ['16px', { lineHeight: '24px', letterSpacing: '0.1px', fontWeight: '400' }], // Desktop body
+        'medium-caption': ['13px', { lineHeight: '21px', letterSpacing: '0.1px', fontWeight: '400' }], // Desktop caption
+
+        // Mobile-specific scaled values (shifted down one level)
+        'mobile-h1': ['55px', { lineHeight: '61px', letterSpacing: '-1.1px', fontWeight: '700' }], // Desktop h5
+        'mobile-h2': ['41px', { lineHeight: '45px', letterSpacing: '-0.8px', fontWeight: '700' }], // Desktop h6
+        'mobile-h3': ['30px', { lineHeight: '39px', letterSpacing: '-0.4px', fontWeight: '700' }], // Desktop body-lg size with bold
+        'mobile-body-lg': ['20px', { lineHeight: '28px', letterSpacing: '-0.1px', fontWeight: '400' }],
+        'mobile-link': ['15px', { lineHeight: '22px', letterSpacing: '0.1px', fontWeight: '400' }],
+        'mobile-body': ['14px', { lineHeight: '20px', letterSpacing: '0.1px', fontWeight: '400' }],
+        'mobile-caption': ['11px', { lineHeight: '18px', letterSpacing: '0.1px', fontWeight: '400' }],
       },
     },
   },
   plugins: [],
-} 
+}
