@@ -24,7 +24,7 @@ module.exports = {
         'h4': ['73px', { lineHeight: '80px', letterSpacing: '-1.5px', fontWeight: '700' }],
         'h5': ['55px', { lineHeight: '61px', letterSpacing: '-1.1px', fontWeight: '700' }],
         'h6': ['41px', { lineHeight: '45px', letterSpacing: '-0.8px', fontWeight: '700' }],
-        'h7': ['35px', { lineHeight: '40px', letterSpacing: '-0.6px', fontWeight: '700' }], // New h7 - smaller than h6
+        'h7': ['31px', { lineHeight: '40px', letterSpacing: '-0.6px', fontWeight: '700' }], // New h7 - smaller than h6
         'body-lg': ['30px', { lineHeight: '39px', letterSpacing: '-0.4px', fontWeight: '400' }],
         'link': ['17px', { lineHeight: '26px', letterSpacing: '0.1px', fontWeight: '400' }],
         'body': ['16px', { lineHeight: '24px', letterSpacing: '0.1px', fontWeight: '400' }],

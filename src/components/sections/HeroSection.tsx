@@ -3,6 +3,7 @@ import { typographyClasses, colorClasses, spacingClasses } from '../../utils/typ
 import TypingEffect from '../common/TypingEffect';
 import { useSmoothScroll } from '../hooks/useSmoothScroll';
 
+
 const HeroSection: React.FC = () => {
   const { scrollToNextSection } = useSmoothScroll();
   

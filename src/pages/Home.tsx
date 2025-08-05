@@ -7,6 +7,7 @@ import ServicesSection from '../components/sections/ServicesSection';
 import ContactSection from '../components/sections/ContactSection';
 import Footer from '../components/sections/Footer';
 
+
 const Home: React.FC = () => {
   return (
     <div className="Home">

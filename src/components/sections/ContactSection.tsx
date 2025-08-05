@@ -24,7 +24,7 @@ const ContactSection: React.FC = () => {
     <section id="contact" className="snap-section min-h-min bg-primary-dark relative overflow-hidden">
       
       {/* Main Content */}
-      <div className="min-h-auto flex flex-col justify-center px-4">
+      <div className="min-h-screen flex flex-col justify-center px-4">
         <div className="mx-auto w-full text-center">
 
           {/* Contact Label */}
@@ -63,26 +63,6 @@ const ContactSection: React.FC = () => {
             >
               BOOK A CALL
             </button>
-          </div>
-
-          {/* Social Links */}
-          <div className="mb-8 px-4 sm:px-6 md:px-8 lg:px-12 justify-self-start">
-            <div className="mb-8 md:justify-self-start">
-              <span className={`${typographyClasses.responsiveBody} text-gray-400 font-mono`}>
-                FIND ME ON
-              </span>
-            </div>
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-              {socialLinks.map((link, index) => (
-                <a 
-                  key={index}
-                  href="#"
-                  className={`${typographyClasses.responsiveBody} ${colorClasses.primary} font-mono hover:${colorClasses.accent} transition-colors duration-300`}
-                >
-                  {link}
-                </a>
-              ))}
-            </div>
           </div>
 
         </div>

@@ -1,172 +1,157 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { typographyClasses, colorClasses, spacingClasses } from '../../utils/typography';
+import { Icon } from "@iconify/react";
 
-const ToolkitSection: React.FC = () => {
+// Toolkit data structure
+const toolkitData = {
+  'Project Management': {
+    gridCols: 3,
+    tools: [
+      { name: 'Jira', icon: 'devicon-plain:jira' },
+      { name: 'Google', icon: 'mdi:google' },
+      { name: 'Microsoft', icon: 'mdi:microsoft' }
+    ]
+  },
+  'Data Analytics | AI / Machine Learning': {
+    gridCols: 4,
+    tools: [
+      { name: 'Python', icon: 'devicon-plain:python' },
+      { name: 'Tensor Flow', icon: 'simple-icons:tensorflow' },
+      { name: 'PyTorch', icon: 'cib:pytorch' },
+      { name: 'OpenAI', icon: 'streamline-logos:openai-logo' }
+    ]
+  },
+  'SOFTWARE DEVELOPMENT': {
+    gridCols: 5,
+    tools: [
+      { name: 'React', icon: 'hugeicons:react' },
+      { name: 'Java Script', icon: 'material-symbols-light:javascript-sharp' },
+      { name: 'Type Script', icon: 'simple-icons:typescript' },
+      { name: 'SQL', icon: 'lineicons:mysql' },
+      { name: 'Docker', icon: 'mdi:docker' }
+    ]
+  },
+  'DEVOPS': {
+    gridCols: 3,
+    tools: [
+      { name: 'Terraform', icon: 'mdi:terraform' },
+      { name: 'GitHub', icon: 'mdi:github' },
+      { name: 'Azure', icon: 'devicon-plain:azure' },
+    ]
+  },
+  'INFORMATION / CYBER - SECURITY': {
+    gridCols: 5,
+    tools: [
+      { name: 'Kali Linux', icon: 'simple-icons:kalilinux' },
+      { name: 'Nmap', icon: 'arcticons:nmap-wrapper' },
+      { name: 'Splunk', icon: 'simple-icons:splunk' },
+      { name: 'Wire shark', icon: 'simple-icons:wireshark' },
+      { name: 'Meta  sploit', icon: 'simple-icons:metasploit' }
+    ]
+  }
+};
+
+// Tool item component
+const ToolItem = ({ tool, hasBorder = true, className = '' }) => (
+  <div className={`${hasBorder ? 'border-r border-black' : ''} flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200 ${className} shadow-md hover:shadow-lg`}>
+    <div className="text-center">
+      <Icon 
+        icon={tool.icon} 
+        className={`${colorClasses.black} w-10 h-10 mb-2 mx-auto drop-shadow-sm font-extrabold`}
+      />
+      <span className={`${typographyClasses.responsiveBody} font-mono text-black drop-shadow-sm`}>{tool.name}</span>
+    </div>
+  </div>
+);
+
+// Section component
+const ToolkitSectionCard = ({ title, data, className = '' }) => {
+  const gridRef = useRef(null);
+
+  useEffect(() => {
+    if (gridRef.current && data.layout !== 'complex') {
+      gridRef.current.style.setProperty('--grid-cols', data.gridCols);
+    }
+  }, [data.gridCols, data.layout]);
+
+  const renderTools = () => {
+    // Dynamic grid layout using CSS custom properties
+    return (
+      <div 
+        ref={gridRef}
+        className="grid h-32"
+        style={{ 
+          gridTemplateColumns: `repeat(${data.gridCols}, minmax(0, 1fr))` 
+        }}
+      >
+        {data.tools.map((tool, index) => (
+          <ToolItem
+            key={`${title}-${index}`}
+            tool={tool}
+            hasBorder={index < data.tools.length - 1}
+          />
+        ))}
+      </div>
+    );
+  };
+
   return (
-    <section id="toolkit" className="snap-section min-h-screen bg-gray-100 py-16 px-4 sm:px-6 md:px-8 lg:px-12">
+    <div className={className}>
+      <div className="bg-accent-yellow border-2 border-black rounded-lg overflow-hidden h-full shadow-lg">
+        <div className="bg-accent-yellow border-b-2 border-black p-4 shadow-sm">
+          <h3 className={`${typographyClasses.responsiveH7} text-black text-center font-mono drop-shadow-sm opacity-80`}>
+            {title}
+          </h3>
+        </div>
+        {renderTools()}
+      </div>
+    </div>
+  );
+};
+
+const ToolkitSection = () => {
+  return (
+    <section id="toolkit" className="snap-section min-h-screen bg-gray-200 py-16 px-4 sm:px-6 md:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
-        {/* Section Title Toolkits*/}
         {/* Main Toolkit Container */}
         <div className="bg-accent-yellow rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl border-4 border-black">
           {/* Grid Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
             {/* Project Management Section */}
-            <div className="lg:col-span-1">
-              <div className="bg-accent-yellow border-2 border-black rounded-lg overflow-hidden h-full">
-                <div className="bg-accent-yellow border-b-2 border-black p-4">
-                  <h3 className={`${typographyClasses.responsiveH6} text-black text-center font-mono`}>
-                    Project Management
-                  </h3>
-                </div>
-                <div className="grid grid-cols-3 h-32">
-                  <div className="border-r border-black flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                    <div className="text-center">
-                      <div className="text-2xl mb-1">📋</div>
-                      <span className="text-xs font-mono text-black">Jira</span>
-                    </div>
-                  </div>
-                  <div className="border-r border-black flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                    <div className="text-center">
-                      <div className="text-2xl mb-1">📊</div>
-                      <span className="text-xs font-mono text-black">Google Workspace</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                    <div className="text-center">
-                      <div className="text-2xl mb-1">🔷</div>
-                      <span className="text-xs font-mono text-black">Microsoft</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ToolkitSectionCard
+              title="Project Management"
+              data={toolkitData['Project Management']}
+              className="lg:col-span-1"
+            />
 
             {/* Data Analytics | AI / Machine Learning Section */}
-            <div className="lg:col-span-2">
-              <div className="bg-accent-yellow border-2 border-black rounded-lg overflow-hidden h-full">
-                <div className="bg-accent-yellow border-b-2 border-black p-4">
-                  <h3 className={`${typographyClasses.responsiveH6} text-black text-center font-mono`}>
-                    Data Analytics | AI / Machine Learning
-                  </h3>
-                </div>
-                <div className="grid grid-cols-4 h-32">
-                  <div className="border-r border-black flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                    <div className="text-center">
-                      <div className="text-3xl mb-1">🐍</div>
-                      <span className="text-xs font-mono text-black">Python</span>
-                    </div>
-                  </div>
-                  <div className="border-r border-black flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                    <div className="text-center">
-                      <div className="text-2xl mb-1">📈</div>
-                      <span className="text-xs font-mono text-black">TensorFlow</span>
-                    </div>
-                  </div>
-                  <div className="border-r border-black flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                    <div className="text-center">
-                      <div className="text-2xl mb-1">🔥</div>
-                      <span className="text-xs font-mono text-black">PyTorch</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                    <div className="text-center">
-                      <div className="text-2xl mb-1">🤖</div>
-                      <span className="text-xs font-mono text-black">OpenAI</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ToolkitSectionCard
+              title="Data Analytics | AI / Machine Learning"
+              data={toolkitData['Data Analytics | AI / Machine Learning']}
+              className="lg:col-span-2"
+            />
 
             {/* Software Development Section */}
-            <div className="lg:col-span-2">
-              <div className="bg-accent-yellow border-2 border-black rounded-lg overflow-hidden h-full">
-                <div className="bg-accent-yellow border-b-2 border-black p-4">
-                  <h3 className={`${typographyClasses.responsiveH6} text-black text-center font-mono`}>
-                    SOFTWARE DEVELOPMENT
-                  </h3>
-                </div>
-                <div className="grid grid-cols-5 h-32">
-                  {[...Array(5)].map((_, index) => (
-                    <div 
-                      key={index}
-                      className={`${index < 4 ? 'border-r border-black' : ''} flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200`}
-                    >
-                      <div className="text-center">
-                        <div className="text-2xl mb-1">🏗️</div>
-                        <span className="text-xs font-mono text-black">Terraform</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <ToolkitSectionCard
+              title="SOFTWARE DEVELOPMENT"
+              data={toolkitData['SOFTWARE DEVELOPMENT']}
+              className="lg:col-span-2"
+            />
 
             {/* DevOps Section */}
-            <div className="lg:col-span-1">
-              <div className="bg-accent-yellow border-2 border-black rounded-lg overflow-hidden h-full">
-                <div className="bg-accent-yellow border-b-2 border-black p-4">
-                  <h3 className={`${typographyClasses.responsiveH6} text-black text-center font-mono`}>
-                    DEVOPS
-                  </h3>
-                </div>
-                <div className="grid grid-cols-2 h-32">
-                  <div className="border-r border-black">
-                    <div className="h-1/2 border-b border-black flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                      <div className="text-center">
-                        <div className="text-xl mb-1">🏗️</div>
-                        <span className="text-xs font-mono text-black">Terraform</span>
-                      </div>
-                    </div>
-                    <div className="h-1/2 flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                      <div className="text-center">
-                        <div className="text-xl mb-1">☁️</div>
-                        <span className="text-xs font-mono text-black">Azure</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div className="h-1/2 border-b border-black flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                      <div className="text-center">
-                        <div className="text-xl mb-1">🐙</div>
-                        <span className="text-xs font-mono text-black">GitHub</span>
-                      </div>
-                    </div>
-                    <div className="h-1/2 flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200">
-                      <div className="text-center">
-                        <div className="text-xl mb-1">☁️</div>
-                        <span className="text-xs font-mono text-black">AWS</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ToolkitSectionCard
+              title="DEVOPS"
+              data={toolkitData['DEVOPS']}
+              className="lg:col-span-1"
+            />
 
             {/* Information / Cyber-Security Section */}
-            <div className="lg:col-span-3">
-              <div className="bg-accent-yellow border-2 border-black rounded-lg overflow-hidden h-full">
-                <div className="bg-accent-yellow border-b-2 border-black p-4">
-                  <h3 className={`${typographyClasses.responsiveH6} text-black text-center font-mono`}>
-                    INFORMATION / CYBER - SECURITY
-                  </h3>
-                </div>
-                <div className="grid grid-cols-5 h-32">
-                  {[...Array(5)].map((_, index) => (
-                    <div 
-                      key={index}
-                      className={`${index < 4 ? 'border-r border-black' : ''} flex items-center justify-center bg-accent-yellow hover:bg-accent-bright-yellow transition-colors duration-200`}
-                    >
-                      <div className="text-center">
-                        <div className="text-2xl mb-1">🏗️</div>
-                        <span className="text-xs font-mono text-black">Terraform</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <ToolkitSectionCard
+              title="INFORMATION / CYBER - SECURITY"
+              data={toolkitData['INFORMATION / CYBER - SECURITY']}
+              className="lg:col-span-3"
+            />
 
           </div>
         </div>
