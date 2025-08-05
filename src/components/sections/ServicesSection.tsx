@@ -4,16 +4,16 @@ import { typographyClasses, colorClasses, spacingClasses } from '../../utils/typ
 const ServicesSection: React.FC = () => {
   const services = [
     {
-      title: 'DevOps',
-      description: 'Streamline your development lifecycle with automated CI/CD pipelines, infrastructure as code, and cloud-native solutions that reduce deployment time and increase reliability.'
-    },
+        title: 'Cybersecurity',
+        description: 'Protect your digital assets with comprehensive security assessments, penetration testing, and implementation of security frameworks that safeguard against modern threats.'
+      },
     {
       title: 'Data Analytics',
       description: 'Transform raw data into actionable insights with advanced analytics, machine learning models, and interactive dashboards that drive informed decision-making.'
     },
     {
-        title: 'Cybersecurity',
-        description: 'Protect your digital assets with comprehensive security assessments, penetration testing, and implementation of security frameworks that safeguard against modern threats.'
+        title: 'DevOps',
+        description: 'Streamline your development lifecycle with automated CI/CD pipelines, infrastructure as code, and cloud-native solutions that reduce deployment time and increase reliability.'
       },
     {
       title: 'Project Management',
@@ -31,7 +31,11 @@ const ServicesSection: React.FC = () => {
       {/* Content */}
       <div className="min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-16">
         <div className="max-w-6xl mx-auto w-full">
-          {/* Services Grid */}
+        {/* Section Title */}
+        <h2 className={`${typographyClasses.responsiveH6} ${colorClasses.accent} mb-20 text-left opacity-50`}>
+          What I Do?
+        </h2>
+        {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-12 gap-y-16 lg:gap-y-20 [&>*:nth-child(5)]:md:max-lg:col-span-full [&>*:nth-child(5)]:md:max-lg:justify-self-center [&>*:nth-child(1)]:lg:col-span-2 [&>*:nth-child(2)]:lg:col-span-2 [&>*:nth-child(3)]:lg:col-span-2 [&>*:nth-child(4)]:lg:col-span-2 [&>*:nth-child(4)]:lg:col-start-2 [&>*:nth-child(5)]:lg:col-span-2 [&>*:nth-child(5)]:lg:col-start-4">
     {services.map((service, index) => (
         <div key={index} className="space-y-6 max-w-sm">

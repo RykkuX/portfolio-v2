@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
       {/* Large Name Typography */}
       <div>
         <div>
-          <h1 className="text-accent-yellow font-mono font-black text-[17vw] leading-none tracking-tight text-center">
+          <h1 className="text-accent-yellow font-mono font-black text-[17vw] leading-none tracking-tight text-center opacity-75">
             LLYCOSAUZA
           </h1>
         </div>
