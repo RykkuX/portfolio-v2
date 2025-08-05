@@ -172,7 +172,7 @@ const ToolkitSection: React.FC = () => {
         </div>
 
         {/* Bottom Description */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-10">
           <p className={`${typographyClasses.responsiveBody} text-gray-600 max-w-7xl mx-auto`}>
             This toolkit represents my comprehensive approach to modern software development, 
             from ideation and planning through deployment and security. Each tool is carefully 
