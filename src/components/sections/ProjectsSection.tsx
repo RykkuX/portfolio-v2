@@ -24,7 +24,7 @@ const ProjectsSection: React.FC = () => {
       websiteUrl: 'https://thribo-web-app.com',
       imageUrl: '/placeholder-project-1.jpg',
       description: 'A comprehensive web application for digital marketing solutions',
-      category: 'Web Application'
+      category: 'Web Application'   
     },
     {
       id: '2',

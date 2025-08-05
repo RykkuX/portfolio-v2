@@ -8,11 +8,13 @@ export const typographyClasses = {
   h4: 'text-h4 font-roboto-mono font-bold',
   h5: 'text-h5 font-roboto-mono font-bold',
   h6: 'text-h6 font-roboto-mono font-bold',
+  h7: 'text-h7 font-roboto-mono font-bold', // New h7 class
   
   // Mobile Heading classes with Roboto Mono font (shifted down one level)
   mobileH1: 'text-mobile-h1 font-roboto-mono font-bold', // Desktop h5 size
   mobileH2: 'text-mobile-h2 font-roboto-mono font-bold', // Desktop h6 size
   mobileH3: 'text-mobile-h3 font-roboto-mono font-bold', // Desktop body-lg size with bold
+  mobileH7: 'text-mobile-h7 font-roboto-mono font-bold', // New mobile h7 class
   
   // Medium screen Heading classes (md: breakpoint)
   mediumH1: 'text-medium-h1 font-roboto-mono font-bold', // Desktop h2 size
@@ -21,14 +23,16 @@ export const typographyClasses = {
   mediumH4: 'text-medium-h4 font-roboto-mono font-bold', // Desktop h5 size
   mediumH5: 'text-medium-h5 font-roboto-mono font-bold', // Desktop h6 size
   mediumH6: 'text-medium-h6 font-roboto-mono font-bold', // Desktop body-lg size with bold
+  mediumH7: 'text-medium-h7 font-roboto-mono font-bold', // New medium h7 class
   
   // Responsive Heading classes (mobile-first with medium breakpoint)
   responsiveH1: 'text-mobile-h1 md:text-medium-h1 lg:text-h1 font-roboto-mono font-bold',
   responsiveH2: 'text-mobile-h2 md:text-medium-h2 lg:text-h2 font-roboto-mono font-bold',
   responsiveH3: 'text-mobile-h3 md:text-medium-h3 lg:text-h3 font-roboto-mono font-bold',
-  responsiveH4: 'text-mobile-h3 md:text-medium-h4 lg:text-h4 font-roboto-mono font-bold',
+  responsiveH4: 'text-mobile-h1 md:text-medium-h4 lg:text-h4 font-roboto-mono font-bold',
   responsiveH5: 'text-mobile-h2 md:text-medium-h5 lg:text-h5 font-roboto-mono font-bold',
-  responsiveH6: 'text-mobile-h1 md:text-medium-h6 lg:text-h6 font-roboto-mono font-bold',
+  responsiveH6: 'text-mobile-h2 md:text-medium-h6 lg:text-h6 font-roboto-mono font-bold',
+  responsiveH7: 'text-mobile-h7 md:text-medium-h7 lg:text-h7 font-roboto-mono font-bold', // New responsive h7 class
   
   // Desktop Body text classes with Inter font
   bodyLg: 'text-body-lg font-inter',
@@ -62,6 +66,7 @@ export const typographyClasses = {
   heroTitle: 'text-mobile-h1 md:text-medium-h1 lg:text-h1 xl:text-h1 font-roboto-mono font-bold leading-tight',
   sectionTitle: 'text-mobile-h2 md:text-medium-h2 lg:text-h2 font-roboto-mono font-bold',
   cardTitle: 'text-mobile-h3 md:text-medium-h3 lg:text-h4 font-roboto-mono font-bold',
+  subsectionTitle: 'text-mobile-h7 md:text-medium-h7 lg:text-h7 font-roboto-mono font-bold', // New specialized h7 class
   navigation: 'text-mobile-link md:text-medium-link lg:text-link font-inter font-medium',
   button: 'text-mobile-body md:text-medium-body lg:text-link font-inter font-medium',
   footer: 'text-mobile-caption md:text-medium-caption lg:text-caption font-inter',
@@ -97,6 +102,7 @@ export const spacingClasses = {
   subtitleSpacing: 'mb-3 sm:mb-4 md:mb-6 lg:mb-8',
   bodySpacing: 'mb-2 sm:mb-3 md:mb-4 lg:mb-6',
   captionSpacing: 'mb-1 sm:mb-2 md:mb-3 lg:mb-4',
+  subsectionSpacing: 'mb-2 sm:mb-3 md:mb-4 lg:mb-5', // New spacing for h7/subsections
   
   // Section spacing
   sectionSpacing: 'py-8 sm:py-12 md:py-16 lg:py-20',
@@ -117,6 +123,9 @@ export const combinedClasses = {
   // Section headers
   sectionHeader: `${typographyClasses.sectionTitle} ${colorClasses.accent} ${spacingClasses.titleSpacing}`,
   sectionDescription: `${typographyClasses.responsiveBody} ${colorClasses.primary} ${spacingClasses.bodySpacing}`,
+  
+  // Subsection headers (using h7)
+  subsectionHeader: `${typographyClasses.subsectionTitle} ${colorClasses.primary} ${spacingClasses.subsectionSpacing}`,
   
   // Cards
   cardTitle: `${typographyClasses.cardTitle} ${colorClasses.primary} ${spacingClasses.subtitleSpacing}`,
