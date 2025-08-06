@@ -29,9 +29,9 @@ export const typographyClasses = {
   responsiveH1: 'text-mobile-h1 md:text-medium-h1 lg:text-h1 font-roboto-mono font-bold',
   responsiveH2: 'text-mobile-h2 md:text-medium-h2 lg:text-h2 font-roboto-mono font-bold',
   responsiveH3: 'text-mobile-h3 md:text-medium-h3 lg:text-h3 font-roboto-mono font-bold',
-  responsiveH4: 'text-mobile-h1 md:text-medium-h4 lg:text-h4 font-roboto-mono font-bold',
+  responsiveH4: 'text-mobile-h3 md:text-medium-h4 lg:text-h4 font-roboto-mono font-bold',
   responsiveH5: 'text-mobile-h2 md:text-medium-h5 lg:text-h5 font-roboto-mono font-bold',
-  responsiveH6: 'text-mobile-h2 md:text-medium-h6 lg:text-h6 font-roboto-mono font-bold',
+  responsiveH6: 'text-mobile-h1 md:text-medium-h6 lg:text-h6 font-roboto-mono font-bold',
   responsiveH7: 'text-mobile-h7 md:text-medium-h7 lg:text-h7 font-roboto-mono font-bold', // New responsive h7 class
   
   // Desktop Body text classes with Inter font
@@ -70,6 +70,33 @@ export const typographyClasses = {
   navigation: 'text-mobile-link md:text-medium-link lg:text-link font-inter font-medium',
   button: 'text-mobile-body md:text-medium-body lg:text-link font-inter font-medium',
   footer: 'text-mobile-caption md:text-medium-caption lg:text-caption font-inter',
+
+  // About Me compact scale classes with Inter font
+  aboutmeH1: 'text-aboutme-h1 font-inter font-bold',
+  aboutmeH2: 'text-aboutme-h2 font-inter font-bold',
+  aboutmeH3: 'text-aboutme-h3 font-inter font-bold',
+  aboutmeH4: 'text-aboutme-h4 font-inter font-bold',
+  aboutmeH5: 'text-aboutme-h5 font-inter font-bold',
+  aboutmeH6: 'text-aboutme-h6 font-inter font-bold',
+  aboutmeH7: 'text-aboutme-h7 font-inter font-bold',
+  aboutmeBodyLg: 'text-aboutme-body-lg font-inter',
+  aboutmeBody: 'text-aboutme-body font-inter',
+  aboutmeLink: 'text-aboutme-link font-inter',
+  aboutmeCaption: 'text-aboutme-caption font-inter',
+
+  // About Me specialized classes for resume sections
+  aboutmeName: 'text-aboutme-h1 font-inter font-bold',
+  aboutmeJobTitle: 'text-aboutme-h2 font-inter font-normal',
+  aboutmeSectionHeader: 'text-aboutme-BodyLg font-inter font-bold',
+  aboutmeSubsectionHeader: 'text-aboutme-Body-Lg font-inter font-bold',
+  aboutmeCompany: 'text-aboutme-h4 font-inter font-semibold',
+  aboutmePosition: 'text-aboutme-h4 font-inter font-medium',
+  aboutmeDate: 'text-aboutme-h5 font-inter font-normal',
+  aboutmeLocation: 'text-aboutme-h6 font-inter font-normal',
+  aboutmeDescription: 'text-aboutme-body font-inter',
+  aboutmeSkill: 'text-aboutme-body-lg font-inter',
+  aboutmeContact: 'text-aboutme-link font-inter',
+  aboutmeFooter: 'text-aboutme-caption font-inter',
 } as const;
 
 export const colorClasses = {
@@ -126,6 +153,20 @@ export const combinedClasses = {
   
   // Subsection headers (using h7)
   subsectionHeader: `${typographyClasses.subsectionTitle} ${colorClasses.primary} ${spacingClasses.subsectionSpacing}`,
+
+  // About Me combined classes with colors and spacing
+  aboutmeProfileName: `${typographyClasses.aboutmeName} ${colorClasses.accent} mb-1`,
+  aboutmeProfileTitle: `${typographyClasses.aboutmeJobTitle} text-gray-300 mb-3`,
+  aboutmeMainSectionHeader: `${typographyClasses.aboutmeSectionHeader} ${colorClasses.accent} mb-4`,
+  aboutmeSubSectionHeader: `${typographyClasses.aboutmeSubsectionHeader} ${colorClasses.primary} mb-2`,
+  aboutmeExperienceCompany: `${typographyClasses.aboutmeCompany} ${colorClasses.accent} mb-1`,
+  aboutmeExperiencePosition: `${typographyClasses.aboutmePosition} ${colorClasses.primary} mb-1`,
+  aboutmeExperienceDate: `${typographyClasses.aboutmeDate} text-gray-400 mb-1`,
+  aboutmeExperienceLocation: `${typographyClasses.aboutmeLocation} text-gray-400 mb-1`,
+  aboutmeExperienceDescription: `${typographyClasses.aboutmeDescription} text-gray-300 mb-2`,
+  aboutmeSkillItem: `${typographyClasses.aboutmeSkill} ${colorClasses.primary} mb-1`,
+  aboutmeContactLink: `${typographyClasses.aboutmeContact} ${colorClasses.accentBright} hover:${colorClasses.accent} transition-colors duration-200`,
+  aboutmeFooterText: `${typographyClasses.aboutmeFooter} text-gray-500 text-center`,
   
   // Cards
   cardTitle: `${typographyClasses.cardTitle} ${colorClasses.primary} ${spacingClasses.subtitleSpacing}`,

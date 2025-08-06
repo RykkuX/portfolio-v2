@@ -19,12 +19,12 @@ const ProjectsSection: React.FC = () => {
   const projects: Project[] = [
     {
       id: '1',
-      title: 'THRIBO WEB APP',
+      title: 'THRIBO Mobile APP',
       technologies: ['JavaScript', 'ReactJS', 'Azure'],
       websiteUrl: 'https://thribo-web-app.com',
       imageUrl: '/placeholder-project-1.jpg',
       description: 'A comprehensive web application for digital marketing solutions',
-      category: 'Web Application'   
+      category: 'Mobile Application'   
     },
     {
       id: '2',
