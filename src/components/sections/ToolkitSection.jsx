@@ -4,12 +4,12 @@ import { Icon } from "@iconify/react";
 
 // Toolkit data structure
 const toolkitData = {
-  'Project Management': {
+  'Software Architecture': {
     gridCols: 3,
     tools: [
-      { name: 'Jira', icon: 'devicon-plain:jira' },
-      { name: 'Google', icon: 'mdi:google' },
-      { name: 'Microsoft', icon: 'mdi:microsoft' }
+      { name: 'Microservices', icon: 'carbon:microservices-2' },
+      { name: 'System Design', icon: 'carbon:network-4' },
+      { name: 'API Design', icon: 'carbon:api' }
     ]
   },
   'Data Analytics | AI / Machine Learning': {
@@ -118,10 +118,10 @@ const ToolkitSection = () => {
           {/* Grid Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            {/* Project Management Section */}
+            {/* Software Architecture Section */}
             <ToolkitSectionCard
-              title="Project Management"
-              data={toolkitData['Project Management']}
+              title="Architecture"
+              data={toolkitData['Software Architecture']}
               className="lg:col-span-1"
             />
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { typographyClasses, colorClasses, spacingClasses } from '../../utils/typography';
+import { typographyClasses, colorClasses } from '../../utils/typography';
 
 const ServicesSection: React.FC = () => {
   const services = [
@@ -16,8 +16,8 @@ const ServicesSection: React.FC = () => {
         description: 'Streamline your development lifecycle with automated CI/CD pipelines, infrastructure as code, and cloud-native solutions that reduce deployment time and increase reliability.'
       },
     {
-      title: 'Project Management',
-      description: 'Orchestrate complex technical projects with agile methodologies, clear communication, and strategic planning to ensure on-time delivery and stakeholder alignment.'
+      title: 'Software Architecture',
+      description: 'Design scalable, maintainable system architectures using proven patterns and principles. From microservices to monoliths, create blueprints that balance technical excellence with business objectives.'
     },
     {
         title: 'Software Development', 

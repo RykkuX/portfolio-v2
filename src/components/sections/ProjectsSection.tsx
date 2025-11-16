@@ -137,9 +137,9 @@ const ProjectsSection: React.FC = () => {
             )}
           </div>
 
-          {/* Project Title - Reduced size for better fit */}
+          {/* Project Title - Left aligned */}
           <h3 
-            className="font-roboto-mono font-medium text-white mb-3 sm:mb-4 transition-all duration-500"
+            className="font-roboto-mono font-medium text-white mb-3 sm:mb-4 transition-all duration-500 text-left"
             style={{
               fontSize: 'clamp(18px, 1.8vw, 20px)',
             }}
@@ -149,13 +149,9 @@ const ProjectsSection: React.FC = () => {
 
           {/* Main Content Area with Description and Tech Stack */}
           <div className="min-h-auto flex flex-col">
-            {/* Description - Reduced size and line clamp for better fit */}
+            {/* Description - Left aligned with responsive body typography */}
             <p 
-              className="font-inter font-bold text-white leading-relaxed max-w-4xl transition-all duration-500 line-clamp-4"
-              style={{
-                fontSize: 'clamp(14px, 1.5vw, 16px)',
-                lineHeight: '1.5',
-              }}
+              className={`${typographyClasses.responsiveBody} text-white max-w-4xl transition-all duration-500 line-clamp-4 text-left`}
             >
               {activeProject.description}
             </p>
@@ -209,15 +205,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive }) => {
       className={`
         w-[240px] sm:w-[280px] md:w-[300px] lg:w-[320px]
         transition-all duration-300
-        ${isActive ? 'scale-105' : 'scale-100 opacity-70'}
         cursor-pointer
+        p-2
       `}
     >
       <div
         className={`
           bg-primary-dark border-2 rounded-lg p-4 h-full
           transition-all duration-300
-          ${isActive ? 'border-accent-yellow shadow-lg shadow-accent-yellow/20' : 'border-secondary-dark'}
+          ${isActive ? 'border-accent-yellow shadow-lg shadow-accent-yellow/20 scale-105' : 'border-secondary-dark scale-100 opacity-70'}
         `}
       >
           {/* Project Image */}

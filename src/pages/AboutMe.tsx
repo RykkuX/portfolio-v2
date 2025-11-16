@@ -37,7 +37,7 @@ const AboutMe: React.FC = () => {
               <h2 className={`${typographyClasses.aboutmeH3} my-4`}>About Me</h2>
               <div className="space-y-2">
                 <p className={typographyClasses.aboutmeBody}>
-                  Hi, I'm Llyco. I'm a graduate of Bachelor of Science in Computer Science. I have a couple of years of experience in Software Engineering, Project Management, and DevOps. A founder of a small tech startup currently incubated here at Iloilo City.
+                  Hi, I'm Llyco. I'm a graduate of Bachelor of Science in Computer Science. I have a couple of years of experience in Software Engineering, Software Architecture, and DevOps. A founder of a small tech startup currently incubated here at Iloilo City.
                 </p>
                 <p className={typographyClasses.aboutmeBody}>
                   My interest in tech is cybersecurity and information security, currently I'm taking a certification from HackTheBox for penetration testing specialist. I would describe myself as eager to learn, objective and critical thinker, a passion for creating things and engineering stuff.
@@ -227,7 +227,7 @@ const AboutMe: React.FC = () => {
               <h2 className={typographyClasses.aboutmeH3}>Skills</h2>
               <ul className="flex flex-wrap gap-3 mt-2">
                 {[
-                  "Project Management",
+                  "Software Architecture",
                   "Data Analytics",
                   "Machine Learning",
                   "Software Development",
