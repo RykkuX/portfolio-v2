@@ -3,6 +3,7 @@ export { default as TypographyDemo } from './common/TypographyDemo';
 export { default as TypingEffect } from './common/TypingEffect';
 
 // Section Components
+export { default as Header } from './sections/Header';
 export { default as HeroSection } from './sections/HeroSection';
 export { default as ProjectsSection } from './sections/ProjectsSection';
 

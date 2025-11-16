@@ -1,13 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { typographyClasses, combinedClasses, colorClasses } from "../utils/typography";
 
 const AboutMe: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleBackToHome = () => {
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white p-6">
       <div className="max-w-7xl mx-auto grid gap-6 grid-cols-1 lg:grid-cols-12 auto-rows-max">
         {/* Nav */}
         <nav className="col-span-full flex justify-start">
-          <button className={typographyClasses.aboutmeBody}>back to home.</button>
+          <button 
+            onClick={handleBackToHome}
+            className={`${typographyClasses.aboutmeBody} hover:opacity-80 transition-opacity duration-200 cursor-pointer`}
+          >
+            back to home.
+          </button>
         </nav>
 
         {/* Left Side */}
