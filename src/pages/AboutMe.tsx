@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { typographyClasses, combinedClasses, colorClasses } from "../utils/typography";
+import { typographyClasses, combinedClasses } from "../utils/typography";
 
 const AboutMe: React.FC = () => {
   const navigate = useNavigate();
@@ -27,7 +27,11 @@ const AboutMe: React.FC = () => {
           {/* Profile / About Me */}
           <section className="bg-[#001020] rounded-lg p-6 text-left border border-primary-dark/30">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 bg-accent-blue/30 border border-accent-blue/50 rounded-full flex-shrink-0" />
+              <img 
+                src="/pfp.jpeg" 
+                alt="John Llyco Sauza" 
+                className="w-16 h-16 rounded-full object-cover border border-accent-blue/50 flex-shrink-0"
+              />
               <div>
                 <h1 className={combinedClasses.aboutmeProfileName}>John Llyco Sauza</h1>
                 <p className={typographyClasses.aboutmeJobTitle}>Full Stack Developer</p>
@@ -161,8 +165,19 @@ const AboutMe: React.FC = () => {
               <div className="flex items-center col-span-2">
                 <span className="bg-yellow-500 text-black px-2 py-1 rounded-full text-xs font-medium">Present</span>
               </div>
-              <div className="flex items-center justify-start col-span-3">
-                <span className={`${typographyClasses.aboutmeH2}, ${colorClasses.success}`}>Open To Work</span>
+              <div className="col-span-3 flex flex-col gap-1">
+                <div>
+                  <div className={typographyClasses.aboutmeBody}>Software Design Architect</div>
+                  <a
+                    href="https://sieitz.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${typographyClasses.aboutmeBody} underline underline-offset-2 transition-transform duration-150 hover:scale-105 opacity-75 block`}
+                  >
+                    Sieitz Corp
+                  </a>
+                </div>
+                <span className={`${typographyClasses.aboutmeBody} opacity-75`}>Iloilo City, Philippines</span>
               </div>
             </div>
 
@@ -178,19 +193,19 @@ const AboutMe: React.FC = () => {
                   date: "Jan 2025",
                   title: "Lead Software Developer",
                   org: "B-Academy PH",
-                  url: "https://www.facebook.com/BAcademyPH",
+                  url: "https://thebacademyph.com/",
                 },
                 {
                   date: "Jul 2024",
                   title: "President",
                   org: "ISATech Society",
-                  url: "https://www.facebook.com/isatechsociety",
+                  url: "https://www.isatech.club/",
                 },
                 {
                   date: "Jan 2024",
                   title: "Software Developer",
                   org: "Z-Tech",
-                  url: "https://www.facebook.com/ztechsolutionsph",
+                  url: "",
                 },
                 {
                   date: "Aug 2023",

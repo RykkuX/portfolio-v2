@@ -19,7 +19,7 @@ const ProjectsSection: React.FC = () => {
     {
       id: '1',
       title: 'Proventous Platform',
-      technologies: ['Laravel', 'React', 'PHP', 'MySQL', 'REST API'],
+      technologies: ['Laravel', 'React', 'PHP', 'MySQL'],
       websiteUrl: 'https://proventous.com/',
       imageUrl: '/Proventous.png',
       description: 'A Laravel-based application with React frontend for the Proventous platform. The project handles candidate management, employer dashboards, and various business operations. As System Design Architect and Full Stack Developer, I designed the scalable system architecture, implemented secure authentication and authorization systems, built RESTful APIs for seamless frontend-backend communication, and developed responsive React components for candidate and employer dashboards.',
@@ -28,7 +28,7 @@ const ProjectsSection: React.FC = () => {
     {
       id: '2',
       title: 'Portfolio v2',
-      technologies: ['React', 'TypeScript', 'Tailwind CSS'],
+      technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
       codebaseUrl: 'https://github.com/RykkuX/portfolio-v2',
       imageUrl: '/Portfolio.png',
       description: 'Modern personal portfolio website built with React and TypeScript, featuring responsive design, smooth animations, and dynamic content sections. Showcases projects, skills, and professional experience with a clean, minimalist interface optimized for performance and user experience.',
@@ -37,7 +37,7 @@ const ProjectsSection: React.FC = () => {
     {
       id: '3',
       title: 'Worka HRMS',
-      technologies: ['Laravel', 'React', 'MySQL', 'REST API'],
+      technologies: ['Laravel', 'React', 'MySQL', 'REST API', 'Flutter', 'Dart'],
       websiteUrl: 'https://worka.bblabs.dev/auth/login',
       imageUrl: '/Worka.png',
       description: 'A comprehensive, unified open-source Human Resource Management System designed to streamline workforce management for organizations. Features include employee management, attendance tracking, leave management, and organizational hierarchy. As System Design Architect and Full Stack Developer, I designed the system architecture and developed core features for efficient HR operations.',
@@ -55,7 +55,7 @@ const ProjectsSection: React.FC = () => {
     {
       id: '5',
       title: 'Project Access Granted',
-      technologies: ['React', 'Next.js', 'Tailwind CSS', 'Cybersecurity'],
+      technologies: ['React', 'Next.js', 'Cybersecurity'],
       websiteUrl: 'https://project-ag.org/',
       imageUrl: '/Project AG.png',
       description: 'Project Access Granted (Project-AG) is a Cyber Security Group established in Iloilo City. A collective of passionate professionals in cybersecurity, software development, and IT innovation. The platform showcases the team, achievements, and community initiatives. As Co-Founder, I helped establish the organization and develop the web presence for our cybersecurity community.',
@@ -151,7 +151,7 @@ const ProjectsSection: React.FC = () => {
           <div className="min-h-auto flex flex-col">
             {/* Description - Left aligned with responsive body typography */}
             <p 
-              className={`${typographyClasses.responsiveBody} text-white max-w-4xl transition-all duration-500 line-clamp-4 text-left`}
+              className={`${typographyClasses.responsiveBody} text-white opacity-75 max-w-4xl transition-all duration-500 line-clamp-4 text-left`}
             >
               {activeProject.description}
             </p>
