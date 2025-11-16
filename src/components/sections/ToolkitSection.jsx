@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { typographyClasses, colorClasses, spacingClasses } from '../../utils/typography';
+import { typographyClasses, colorClasses } from '../../utils/typography';
 import { Icon } from "@iconify/react";
 
 // Toolkit data structure
@@ -28,7 +28,7 @@ const toolkitData = {
       { name: 'Java Script', icon: 'material-symbols-light:javascript-sharp' },
       { name: 'Type Script', icon: 'simple-icons:typescript' },
       { name: 'SQL', icon: 'lineicons:mysql' },
-      { name: 'Docker', icon: 'mdi:docker' }
+      { name: 'PHP', icon: 'mdi:language-php' }
     ]
   },
   'DEVOPS': {
