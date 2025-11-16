@@ -18,7 +18,7 @@ interface UseCarouselReturn {
 /**
  * Custom hook for managing infinite carousel with repositioning
  * - Click: Cards slide to reposition clicked card to leftmost
- * - Scroll: Snaps leftmost card to precise position
+ * - Scroll: Natural scroll positions, active card updates instantly
  * - Infinite loop: Last card → First card
  */
 export const useCarousel = ({
@@ -68,8 +68,7 @@ export const useCarousel = ({
           if (visibleCards.length > 0) {
             const leftmostIndex = visibleCards[0].index;
             setActiveIndex(leftmostIndex);
-            // Snap to leftmost card
-            snapToLeftmostCard(leftmostIndex);
+            // Active card updates instantly, no snapping
           }
         },
         {
@@ -133,10 +132,17 @@ export const useCarousel = ({
       return;
     }
 
-    const cardLeft = card.offsetLeft;
+    // Calculate position within the set
+    const cardWidth = card.offsetWidth || 0;
+    const gap = 24; // gap-6 = 24px
+    const setWidth = itemCount * (cardWidth + gap);
+    const cardOffsetInSet = card.offsetLeft % setWidth;
+    
+    // Position in middle set (middle set starts at setWidth)
+    const middleSetPosition = setWidth + cardOffsetInSet;
     
     carousel.scrollTo({
-      left: cardLeft,
+      left: middleSetPosition,
       behavior: 'smooth',
     });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useCarousel } from '../hooks/useCarousel';
 
 interface CarouselProps<T> {
@@ -14,7 +14,7 @@ interface CarouselProps<T> {
 /**
  * Infinite looping carousel with card repositioning
  * - Click: Cards slide to bring clicked card to leftmost position
- * - Scroll: Snaps leftmost card to precise position
+ * - Scroll: Natural scroll positions, active card updates instantly
  * - Infinite loop: Last card → First card
  */
 function Carousel<T extends { id: string }>({
@@ -26,14 +26,11 @@ function Carousel<T extends { id: string }>({
   intersectionThreshold,
   intersectionRatio,
 }: CarouselProps<T>) {
-  const { activeIndex, carouselRef, cardRefs, setActiveIndex, scrollToIndex } = useCarousel({
+  const { activeIndex, carouselRef, cardRefs, scrollToIndex } = useCarousel({
     itemCount: items.length,
     intersectionThreshold,
     intersectionRatio,
   });
-
-  const scrollPositionRef = useRef(0);
-  const isUserScrollingRef = useRef(false);
 
   // Notify parent of active index changes
   useEffect(() => {
@@ -60,89 +57,39 @@ function Carousel<T extends { id: string }>({
     }, 100);
 
     return () => clearTimeout(timeout);
-  }, [carouselRef, items.length]);
+  }, [carouselRef, items.length, cardRefs]);
 
-  // Handle infinite loop and snap on scroll
+  // Handle infinite loop boundaries only (no snapping)
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    let scrollTimeout: NodeJS.Timeout;
-
     const handleScroll = () => {
-      isUserScrollingRef.current = true;
-      scrollPositionRef.current = carousel.scrollLeft;
+      const scrollLeft = carousel.scrollLeft;
+      const clientWidth = carousel.clientWidth;
+      const cardWidth = cardRefs.current[0]?.offsetWidth || 0;
+      const gap = 24;
+      const setWidth = items.length * (cardWidth + gap);
 
-      // Clear existing timeout
-      clearTimeout(scrollTimeout);
-
-      // After scroll ends, snap to leftmost card and handle infinite loop
-      scrollTimeout = setTimeout(() => {
-        isUserScrollingRef.current = false;
-        
-        const scrollLeft = carousel.scrollLeft;
-        const scrollWidth = carousel.scrollWidth;
-        const clientWidth = carousel.clientWidth;
-        const cardWidth = cardRefs.current[0]?.offsetWidth || 0;
-        const gap = 24;
-        const setWidth = items.length * (cardWidth + gap);
-
-        // Handle infinite loop: if near end, jump to beginning of middle set
-        if (scrollLeft >= setWidth * 2 - clientWidth / 2) {
-          const newPosition = setWidth + (scrollLeft % setWidth);
-          carousel.scrollTo({ left: newPosition, behavior: 'auto' });
-          return;
-        }
-        // Handle infinite loop: if near beginning, jump to end of middle set
-        if (scrollLeft <= setWidth / 2) {
-          const newPosition = setWidth + (scrollLeft % setWidth);
-          carousel.scrollTo({ left: newPosition, behavior: 'auto' });
-          return;
-        }
-        
-        // Find leftmost visible card in middle set
-        const cards = cardRefs.current.filter(Boolean);
-        type LeftmostCard = {
-          index: number;
-          left: number;
-        };
-        let leftmostCard: LeftmostCard | null = null;
-
-        cards.forEach((card, index) => {
-          if (!card) return;
-          const rect = card.getBoundingClientRect();
-          const carouselRect = carousel.getBoundingClientRect();
-          
-          // Check if card is visible and to the left of current leftmost
-          if (rect.right > carouselRect.left && rect.left < carouselRect.right) {
-            const relativeLeft = rect.left - carouselRect.left;
-            if (!leftmostCard || relativeLeft < leftmostCard.left) {
-              leftmostCard = { index, left: relativeLeft };
-            }
-          }
-        });
-
-        // Snap to leftmost card
-        if (leftmostCard) {
-          const leftmostIndex = (leftmostCard as LeftmostCard).index;
-          const card = cardRefs.current[leftmostIndex];
-          if (card) {
-            carousel.scrollTo({
-              left: card.offsetLeft,
-              behavior: 'smooth',
-            });
-            setActiveIndex(leftmostIndex);
-          }
-        }
-      }, 150); // Debounce scroll end
+      // Handle infinite loop: if near end, jump to beginning of middle set
+      if (scrollLeft >= setWidth * 2 - clientWidth / 2) {
+        const newPosition = setWidth + (scrollLeft % setWidth);
+        carousel.scrollTo({ left: newPosition, behavior: 'auto' });
+        return;
+      }
+      // Handle infinite loop: if near beginning, jump to end of middle set
+      if (scrollLeft <= setWidth / 2) {
+        const newPosition = setWidth + (scrollLeft % setWidth);
+        carousel.scrollTo({ left: newPosition, behavior: 'auto' });
+        return;
+      }
     };
 
     carousel.addEventListener('scroll', handleScroll);
     return () => {
       carousel.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
     };
-  }, [carouselRef, cardRefs, setActiveIndex]);
+  }, [carouselRef, cardRefs, items.length]);
 
   const handleItemClick = (index: number) => {
     // Reposition clicked card to leftmost with slide animation
@@ -156,7 +103,7 @@ function Carousel<T extends { id: string }>({
   return (
     <div
       ref={carouselRef}
-      className={`flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-4 ${className}`}
+      className={`flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 ${className}`}
       style={{
         scrollbarWidth: 'none',
         msOverflowStyle: 'none',
