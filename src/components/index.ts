@@ -9,5 +9,4 @@ export { default as HeroSection } from './sections/HeroSection';
 export { default as ProjectsSection } from './sections/ProjectsSection';
 
 // Hook Components
-export { useSmoothScroll } from './hooks/useSmoothScroll';
-export { useCarousel } from './hooks/useCarousel'; 
+export { useSmoothScroll } from './hooks/useSmoothScroll'; 

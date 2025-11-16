@@ -175,12 +175,9 @@ const ProjectsSection: React.FC = () => {
                 <ProjectCard
                   project={project}
                   isActive={isActive}
-                  onClick={() => {
-                    // Click handling is managed by Carousel component
-                  }}
                 />
               )}
-              itemClassName="flex-shrink-0 cursor-pointer snap-start"
+              itemClassName="flex-shrink-0"
             />
           </div>
         </div>
@@ -192,17 +189,16 @@ const ProjectsSection: React.FC = () => {
 interface ProjectCardProps {
   project: Project;
   isActive: boolean;
-  onClick: () => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive }) => {
   return (
     <div
-      onClick={onClick}
       className={`
         w-[320px] sm:w-[384px] md:w-[400px] lg:w-[420px]
         transition-all duration-300
         ${isActive ? 'scale-105' : 'scale-100 opacity-70'}
+        cursor-pointer
       `}
     >
       <div
