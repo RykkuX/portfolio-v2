@@ -115,12 +115,15 @@ const ToolkitSection = () => {
 
   // Intersection Observer to detect when section enters/exits viewport
   useEffect(() => {
+    // Use different threshold based on screen size
+    const threshold = window.innerWidth >= 1024 ? 0.7 : 0.2;
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
       {
-        threshold: 0.5, // Trigger when 30% of section is visible
+        threshold: threshold, // 0.5 for large screens (lg+), 0.2 for smaller screens
         rootMargin: '0px'
       }
     );

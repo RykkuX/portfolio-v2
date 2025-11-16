@@ -32,7 +32,7 @@ const ServicesSection: React.FC = () => {
       <div className="min-h-screen flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-12 py-16">
         <div className="max-w-6xl mx-auto w-full">
         {/* Section Title */}
-        <h2 className={`${typographyClasses.responsiveH6} ${colorClasses.accent} mb-20 text-left opacity-50`}>
+        <h2 className={`${typographyClasses.responsiveH7} ${colorClasses.accent} mb-20 text-left opacity-50`}>
           What I Do?
         </h2>
         {/* Services Grid */}
@@ -40,7 +40,7 @@ const ServicesSection: React.FC = () => {
     {services.map((service, index) => (
         <div key={index} className="space-y-6 max-w-sm">
             {/* Service Title */}
-            <h3 className={`${typographyClasses.responsiveH6} ${colorClasses.primary} font-mono`}>
+            <h3 className={`${typographyClasses.responsiveH7} ${colorClasses.primary} font-mono`}>
                 {service.title}
             </h3>
   
