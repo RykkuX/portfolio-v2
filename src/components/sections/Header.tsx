@@ -17,10 +17,18 @@ const Header: React.FC = () => {
     // If not on home page, navigate to home first, then scroll
     if (location.pathname !== '/') {
       navigate('/');
-      // Wait for navigation to complete before scrolling
-      setTimeout(() => {
-        scrollToSection(sectionId);
-      }, 100);
+      // Wait for navigation and page render to complete before scrolling
+      // Use a longer timeout and retry mechanism to ensure section exists
+      const scrollToSectionWithRetry = (attempts = 0) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          scrollToSection(sectionId);
+        } else if (attempts < 10) {
+          // Retry up to 10 times (500ms total wait time)
+          setTimeout(() => scrollToSectionWithRetry(attempts + 1), 50);
+        }
+      };
+      setTimeout(() => scrollToSectionWithRetry(), 200);
     } else {
       scrollToSection(sectionId);
     }
@@ -43,9 +51,17 @@ const Header: React.FC = () => {
     // If not on home page, navigate to home first, then scroll
     if (location.pathname !== '/') {
       navigate('/');
-      setTimeout(() => {
-        scrollToSection('contact');
-      }, 100);
+      // Wait for navigation and page render to complete before scrolling
+      const scrollToSectionWithRetry = (attempts = 0) => {
+        const element = document.getElementById('contact');
+        if (element) {
+          scrollToSection('contact');
+        } else if (attempts < 10) {
+          // Retry up to 10 times (500ms total wait time)
+          setTimeout(() => scrollToSectionWithRetry(attempts + 1), 50);
+        }
+      };
+      setTimeout(() => scrollToSectionWithRetry(), 200);
     } else {
       scrollToSection('contact');
     }

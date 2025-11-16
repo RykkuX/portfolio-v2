@@ -12,7 +12,9 @@ interface UseCarouselReturn {
   cardRefs: React.MutableRefObject<(HTMLDivElement | null)[]>;
   setActiveIndex: (index: number) => void;
   scrollToIndex: (index: number) => void;
+  scrollToCardInstance: (cardElement: HTMLElement, relativeIndex: number) => void;
   snapToLeftmost: () => void;
+  isLoopingRef: React.MutableRefObject<boolean>;
 }
 
 /**
@@ -31,6 +33,7 @@ export const useCarousel = ({
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isScrollingRef = useRef(false);
   const isRepositioningRef = useRef(false);
+  const isLoopingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Reset refs array when item count changes
@@ -47,19 +50,29 @@ export const useCarousel = ({
     let timeoutId: NodeJS.Timeout;
 
     timeoutId = setTimeout(() => {
-      const cards = cardRefs.current.filter(Boolean);
-      if (cards.length === 0) return;
+      // Observe all cards in the carousel, not just middle set
+      // This allows active detection to work across all sets
+      const allCards = carousel.querySelectorAll('[data-relative-index]');
+      if (allCards.length === 0) return;
 
       observer = new IntersectionObserver(
         (entries) => {
-          // Ignore during programmatic operations
-          if (isScrollingRef.current || isRepositioningRef.current) return;
+          // Ignore during programmatic operations or infinite loop jumps
+          if (isScrollingRef.current || isRepositioningRef.current || isLoopingRef.current) return;
 
-          // Find the leftmost visible card
+          // Find the leftmost visible card across all sets
           const visibleCards = entries
             .filter((entry) => entry.isIntersecting && entry.intersectionRatio > intersectionRatio)
             .map((entry) => {
-              const index = cardRefs.current.findIndex((ref) => ref === entry.target);
+              // Get relative index from data attribute
+              let index = -1;
+              if (entry.target instanceof HTMLElement) {
+                const relativeIndex = entry.target.getAttribute('data-relative-index');
+                if (relativeIndex !== null) {
+                  index = parseInt(relativeIndex, 10);
+                }
+              }
+              
               return { index, left: entry.boundingClientRect.left };
             })
             .filter((item) => item.index !== -1)
@@ -78,8 +91,9 @@ export const useCarousel = ({
         }
       );
 
-      cards.forEach((card) => {
-        if (card) observer!.observe(card);
+      // Observe all cards with data-relative-index attribute
+      allCards.forEach((card) => {
+        observer!.observe(card);
       });
     }, 0);
 
@@ -157,6 +171,32 @@ export const useCarousel = ({
     }, 600);
   }, [itemCount]);
 
+  // Scroll to a specific card instance (for infinite loop support)
+  const scrollToCardInstance = useCallback((cardElement: HTMLElement, relativeIndex: number) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    isRepositioningRef.current = true;
+    setActiveIndex(relativeIndex);
+
+    const cardLeft = cardElement.offsetLeft;
+    
+    carousel.scrollTo({
+      left: cardLeft,
+      behavior: 'smooth',
+    });
+
+    // Re-enable observer after animation completes
+    if (scrollTimeoutRef.current) {
+      clearTimeout(scrollTimeoutRef.current);
+    }
+    scrollTimeoutRef.current = setTimeout(() => {
+      isRepositioningRef.current = false;
+      isScrollingRef.current = false;
+      scrollTimeoutRef.current = null;
+    }, 600);
+  }, [setActiveIndex]);
+
   const snapToLeftmost = useCallback(() => {
     snapToLeftmostCard(activeIndex);
   }, [activeIndex, snapToLeftmostCard]);
@@ -167,6 +207,8 @@ export const useCarousel = ({
     cardRefs,
     setActiveIndex,
     scrollToIndex,
+    scrollToCardInstance,
     snapToLeftmost,
+    isLoopingRef,
   };
 };

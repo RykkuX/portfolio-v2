@@ -10,7 +10,7 @@ const AboutMe: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-6">
+    <div className="min-h-screen bg-primary-dark text-white p-6">
       <div className="max-w-7xl mx-auto grid gap-6 grid-cols-1 lg:grid-cols-12 auto-rows-max">
         {/* Nav */}
         <nav className="col-span-full flex justify-start">
@@ -25,9 +25,9 @@ const AboutMe: React.FC = () => {
         {/* Left Side */}
         <div className="lg:col-span-7 col-span-full flex flex-col gap-6">
           {/* Profile / About Me */}
-          <section className="bg-gray-800 rounded-lg p-6 text-left">
+          <section className="bg-[#001020] rounded-lg p-6 text-left border border-primary-dark/30">
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-16 h-16 bg-gray-300 rounded-full flex-shrink-0" />
+              <div className="w-16 h-16 bg-accent-blue/30 border border-accent-blue/50 rounded-full flex-shrink-0" />
               <div>
                 <h1 className={combinedClasses.aboutmeProfileName}>John Llyco Sauza</h1>
                 <p className={typographyClasses.aboutmeJobTitle}>Full Stack Developer</p>
@@ -49,7 +49,7 @@ const AboutMe: React.FC = () => {
           {/* Recognitions & Certifications */}
           <div className="flex flex-col gap-6 md:grid md:grid-cols-5 md:gap-6 text-left">
             {/* Recognitions */}
-            <section className="bg-gray-800 rounded-lg p-6 h-fit md:col-span-3">
+            <section className="bg-[#001020] rounded-lg p-6 h-fit md:col-span-3 border border-primary-dark/30">
               <h2 className={typographyClasses.aboutmeH3}>Recognitions</h2>
               <ul className="space-y-2 mt-4">
                 {[
@@ -69,7 +69,7 @@ const AboutMe: React.FC = () => {
             </section>
 
             {/* Certifications */}
-            <section className="bg-gray-800 rounded-lg p-6 md:col-span-2">
+            <section className="bg-[#001020] rounded-lg p-6 md:col-span-2 border border-primary-dark/30">
               <h2 className={typographyClasses.aboutmeH3}>Certifications</h2>
               <ul className="space-y-2 mt-4">
                 {[
@@ -88,7 +88,7 @@ const AboutMe: React.FC = () => {
             </section>
             
             {/* Contact */}
-            <section className="bg-gray-800 rounded-lg p-6 text-left md:col-span-full">
+            <section className="bg-[#001020] rounded-lg p-6 text-left md:col-span-full border border-primary-dark/30">
               <h2 className={typographyClasses.aboutmeBody}>Contact</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-7 gap-x-4 gap-y-6 mt-4 w-full">
                 <div className="flex flex-col items-start w-full">
@@ -153,7 +153,7 @@ const AboutMe: React.FC = () => {
         {/* Right Side */}
         <div className="lg:col-span-5 col-span-full flex flex-col gap-6">
           {/* Experience */}
-          <section className="bg-gray-800 rounded-lg p-6 text-left h-fit">
+          <section className="bg-[#001020] rounded-lg p-6 text-left h-fit border border-primary-dark/30">
             <div className="flex items-center gap-2 mb-10">
               <h2 className={typographyClasses.aboutmeH3}>Experience</h2>
             </div>
@@ -223,7 +223,7 @@ const AboutMe: React.FC = () => {
           </section>
 
            {/* Skills */}
-           <section className="bg-gray-800 rounded-lg p-6 h-fit md:col-span-5 text-left">
+           <section className="bg-[#001020] rounded-lg p-6 h-fit md:col-span-5 text-left border border-primary-dark/30">
               <h2 className={typographyClasses.aboutmeH3}>Skills</h2>
               <ul className="flex flex-wrap gap-3 mt-2">
                 {[
@@ -246,7 +246,7 @@ const AboutMe: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <footer className="col-span-full flex justify-between items-center pt-6 border-t border-gray-700">
+        <footer className="col-span-full flex justify-between items-center pt-6 border-t border-primary-dark/30">
           <p className={typographyClasses.aboutmeBody}>Llyco Sauza 2025.</p>
           <button className={typographyClasses.aboutmeBody}>Download as PDF</button>
         </footer>
