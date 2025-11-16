@@ -143,19 +143,39 @@ const ToolkitSection = () => {
       <div className="max-w-7xl mx-auto">
         {/* Main Toolkit Container with Door Panels */}
         <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-          {/* Door Panels */}
+          {/* Left Door Panel */}
           <div 
-            className={`absolute top-0 bottom-0 left-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-transform duration-[1500ms] ease-in-out origin-right rounded-l-3xl ${
-              isInView ? '-translate-x-full' : 'translate-x-0'
+            className={`absolute top-0 bottom-0 left-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-all duration-[1500ms] ease-in-out origin-right rounded-l-3xl ${
+              isInView ? '-translate-x-full shadow-2xl' : 'translate-x-0 shadow-md'
             }`}
             style={{ transformStyle: 'preserve-3d' }}
-          />
+          >
+            {/* Corner Rivets - Left Door */}
+            <div className="absolute top-4 left-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            <div className="absolute top-4 right-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            <div className="absolute bottom-4 left-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            <div className="absolute bottom-4 right-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            
+            {/* Center Handle - Left Door */}
+            <div className="absolute top-1/2 right-6 -translate-y-1/2 w-2 h-24 bg-black rounded-full shadow-lg"></div>
+          </div>
+          
+          {/* Right Door Panel */}
           <div 
-            className={`absolute top-0 bottom-0 right-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-transform duration-[1500ms] ease-in-out origin-left rounded-r-3xl ${
-              isInView ? 'translate-x-full' : 'translate-x-0'
+            className={`absolute top-0 bottom-0 right-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-all duration-[1500ms] ease-in-out origin-left rounded-r-3xl ${
+              isInView ? 'translate-x-full shadow-2xl' : 'translate-x-0 shadow-md'
             }`}
             style={{ transformStyle: 'preserve-3d' }}
-          />
+          >
+            {/* Corner Rivets - Right Door */}
+            <div className="absolute top-4 left-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            <div className="absolute top-4 right-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            <div className="absolute bottom-4 left-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            <div className="absolute bottom-4 right-4 w-3 h-3 bg-black rounded-full shadow-inner"></div>
+            
+            {/* Center Handle - Right Door */}
+            <div className="absolute top-1/2 left-6 -translate-y-1/2 w-2 h-24 bg-black rounded-full shadow-lg"></div>
+          </div>
           
           {/* Toolkit Content */}
           <div className="bg-accent-yellow rounded-3xl p-6 md:p-8 lg:p-12 border-4 border-black relative z-10">
