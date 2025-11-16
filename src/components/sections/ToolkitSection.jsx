@@ -7,7 +7,7 @@ const toolkitData = {
   'Software Architecture': {
     gridCols: 3,
     tools: [
-      { name: 'Microservices', icon: 'carbon:microservices-2' },
+      { name: 'Micro services', icon: 'carbon:microservices-2' },
       { name: 'System Design', icon: 'carbon:network-4' },
       { name: 'API Design', icon: 'carbon:api' }
     ]

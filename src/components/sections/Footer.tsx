@@ -1,14 +1,14 @@
 import React from 'react';
-import { typographyClasses, colorClasses, combinedClasses } from '../../utils/typography';
+import { Link } from 'react-router-dom';
+import { typographyClasses, colorClasses } from '../../utils/typography';
 
 const Footer: React.FC = () => {
   const footerLinks = [
-    'EMAIL',
-    'FACEBOOK',
-    'GITHUB',
-    'LINKEDIN',
-    'INSTAGRAM',
-    'RESUME'
+    { label: 'EMAIL', href: 'mailto:llycosauza@gmail.com', external: true },
+    { label: 'FACEBOOK', href: 'https://www.facebook.com/LikesXauza/', external: true },
+    { label: 'GITHUB', href: 'https://github.com/RykkuX', external: true },
+    { label: 'LINKEDIN', href: 'https://www.linkedin.com/in/llyco-sauza-654151321', external: true },
+    { label: 'RESUME', href: '/resume', external: false }
   ];
 
   return (
@@ -30,13 +30,25 @@ const Footer: React.FC = () => {
           {/* Footer Links */}
           <div className="flex flex-wrap gap-x-8 gap-y-2 justify-end">
             {footerLinks.map((link, index) => (
-              <a 
-                key={index}
-                href="#"
-                className={`${typographyClasses.responsiveCaption} ${colorClasses.primary} font-mono hover:${colorClasses.accent} transition-colors duration-300 whitespace-nowrap`}
-              >
-                {link}
-              </a>
+              link.external ? (
+                <a 
+                  key={index}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${typographyClasses.responsiveCaption} ${colorClasses.primary} font-mono hover:${colorClasses.accent} transition-colors duration-300 whitespace-nowrap`}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={index}
+                  to={link.href}
+                  className={`${typographyClasses.responsiveCaption} ${colorClasses.primary} font-mono hover:${colorClasses.accent} transition-colors duration-300 whitespace-nowrap`}
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
         </div>       
