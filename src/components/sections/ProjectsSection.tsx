@@ -70,26 +70,27 @@ const ProjectsSection: React.FC = () => {
   return (
     <section id="projects" className="snap-section min-h-screen bg-primary-dark text-white py-8 sm:py-12 lg:py-16 relative overflow-hidden">
       {/* 3D Background Image Layer */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="min-[600px]:-mt-16 perspective-[4000px] perspective-origin-top-right transform-3d relative h-full">
+      <div className="absolute inset-0 z-0">
+        <div className="min-[600px]:-mt-16 perspective-[4000px] perspective-origin-top-right transform-3d relative h-full w-full">
           <div 
-            className="relative transition-opacity duration-500"
+            className="relative transition-all duration-700 ease-in-out"
             style={{
               transform: 'scale(1.5) rotateX(47deg) rotateY(31deg) rotate(324deg) translateX(25%)',
             }}
           >
             <div className="relative">
-              {/* Project Image */}
-              <div className="border-2 border-[#171717] rounded-4xl overflow-hidden bg-secondary-dark transition-all duration-500">
+              {/* Project Image - Dynamic based on active project */}
+              <div className="border-2 border-[#171717] rounded-4xl overflow-hidden bg-secondary-dark transition-all duration-700">
                 {activeProject.imageUrl && !activeProject.imageUrl.includes('placeholder') ? (
                   <img
+                    key={activeProject.id}
                     src={activeProject.imageUrl}
                     alt={activeProject.title}
-                    className="w-full h-96 object-cover transition-opacity duration-500"
+                    className="w-full h-96 object-cover transition-all duration-700 opacity-60"
                   />
                 ) : (
-                  <div className="w-full h-96 bg-gradient-to-br from-secondary-dark via-accent-blue to-primary-dark flex items-center justify-center">
-                    <div className="text-center text-gray-400 transition-all duration-500">
+                  <div className="w-full h-96 bg-gradient-to-br from-secondary-dark via-accent-blue to-primary-dark flex items-center justify-center opacity-60">
+                    <div className="text-center text-gray-400 transition-all duration-700">
                       <div className="text-6xl mb-4">📱</div>
                       <p className={`${typographyClasses.responsiveBody} text-gray-500`}>
                         {activeProject.title}
@@ -98,15 +99,15 @@ const ProjectsSection: React.FC = () => {
                   </div>
                 )}
               </div>
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 w-[200%] size-full bg-gradient-to-r from-primary-dark via-primary-dark/80 to-transparent pointer-events-none"></div>
+              {/* Gradient Overlay - Lighter for better background visibility */}
+              <div className="absolute inset-0 w-[200%] size-full bg-gradient-to-r from-primary-dark via-primary-dark/50 to-transparent pointer-events-none"></div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-10 w-full min-h-screen">
+      <div className="relative z-20 w-full min-h-screen">
         {/* Container with responsive padding matching Figma spacing */}
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-[148px] py-6 sm:py-8 md:py-10 lg:py-12">
           {/* Top Row: "Projects" label and "Visit >" link */}
