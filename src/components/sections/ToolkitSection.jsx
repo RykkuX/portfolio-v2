@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { typographyClasses, colorClasses } from '../../utils/typography';
 import { Icon } from "@iconify/react";
 
@@ -110,11 +110,55 @@ const ToolkitSectionCard = ({ title, data, className = '' }) => {
 };
 
 const ToolkitSection = () => {
+  const [isInView, setIsInView] = useState(false);
+  const sectionRef = useRef(null);
+
+  // Intersection Observer to detect when section enters/exits viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of section is visible
+        rootMargin: '0px'
+      }
+    );
+
+    const currentSection = sectionRef.current;
+
+    if (currentSection) {
+      observer.observe(currentSection);
+    }
+
+    return () => {
+      if (currentSection) {
+        observer.unobserve(currentSection);
+      }
+    };
+  }, []);
+
   return (
-    <section id="toolkit" className="snap-section min-h-screen bg-gray-200 py-16 px-4 sm:px-6 md:px-8 lg:px-12">
+    <section ref={sectionRef} id="toolkit" className="snap-section min-h-screen bg-gray-200 py-16 px-4 sm:px-6 md:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
-        {/* Main Toolkit Container */}
-        <div className="bg-accent-yellow rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl border-4 border-black">
+        {/* Main Toolkit Container with Door Panels */}
+        <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+          {/* Door Panels */}
+          <div 
+            className={`absolute top-0 bottom-0 left-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-transform duration-1000 ease-in-out origin-right rounded-l-3xl ${
+              isInView ? '-translate-x-full' : 'translate-x-0'
+            }`}
+            style={{ transformStyle: 'preserve-3d' }}
+          />
+          <div 
+            className={`absolute top-0 bottom-0 right-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-transform duration-1000 ease-in-out origin-left rounded-r-3xl ${
+              isInView ? 'translate-x-full' : 'translate-x-0'
+            }`}
+            style={{ transformStyle: 'preserve-3d' }}
+          />
+          
+          {/* Toolkit Content */}
+          <div className="bg-accent-yellow rounded-3xl p-6 md:p-8 lg:p-12 border-4 border-black relative z-10">
           {/* Grid Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
@@ -153,6 +197,7 @@ const ToolkitSection = () => {
               className="lg:col-span-3"
             />
 
+          </div>
           </div>
         </div>
 
