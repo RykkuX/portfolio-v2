@@ -51,8 +51,8 @@ function Carousel<T extends { id: string }>({
         const cardWidth = firstCard.offsetWidth;
         const gap = 24; // gap-6 = 24px
         // Scroll to start of original items (middle set)
-        // With 3 full iterations, original items start at items.length * itemWidth
-        const originalItemsStart = items.length * (cardWidth + gap);
+        // With 5 full iterations, original items start at 2 * items.length * itemWidth
+        const originalItemsStart = items.length * 2 * (cardWidth + gap);
         carousel.scrollTo({ left: originalItemsStart, behavior: 'auto' });
       }
     }, 100);
@@ -60,7 +60,7 @@ function Carousel<T extends { id: string }>({
     return () => clearTimeout(timeout);
   }, [carouselRef, items.length, cardRefs]);
 
-  // Handle infinite loop boundaries using buffer approach
+  // Handle infinite loop boundaries - truly seamless infinite scrolling
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel || items.length === 0) return;
@@ -68,62 +68,12 @@ function Carousel<T extends { id: string }>({
     let rafId: number | null = null;
     let loopTimeoutId: NodeJS.Timeout | null = null;
     let lastScrollLeft = carousel.scrollLeft;
-    let lastJumpTime = 0;
-    let expectedPositionAfterJump: number | null = null;
-
-    const performJump = (newPosition: number) => {
-      isLoopingRef.current = true;
-      lastJumpTime = Date.now();
-      expectedPositionAfterJump = newPosition;
-      
-      if (loopTimeoutId) {
-        clearTimeout(loopTimeoutId);
-      }
-      
-      // Remove scroll listener temporarily to prevent re-triggering
-      carousel.removeEventListener('scroll', handleScroll);
-      
-      // Perform the jump
-      carousel.scrollLeft = newPosition;
-      lastScrollLeft = newPosition;
-      
-      // Re-add scroll listener after a delay
-      loopTimeoutId = setTimeout(() => { 
-        isLoopingRef.current = false;
-        expectedPositionAfterJump = null;
-        carousel.addEventListener('scroll', handleScroll, { passive: true });
-        loopTimeoutId = null;
-      }, 600);
-    };
 
     const handleScroll = () => {
       // Ignore during programmatic operations
       if (isLoopingRef.current) return;
 
-      const currentScrollLeft = carousel.scrollLeft;
-      
-      // Ignore if we're at the expected position after a jump (prevents immediate re-trigger)
-      if (expectedPositionAfterJump !== null && Math.abs(currentScrollLeft - expectedPositionAfterJump) < 10) {
-        lastScrollLeft = currentScrollLeft;
-        return;
-      }
-
-      const scrollDelta = currentScrollLeft - lastScrollLeft;
-      
-      // Ignore tiny movements
-      if (Math.abs(scrollDelta) < 1) {
-        lastScrollLeft = currentScrollLeft;
-        return;
-      }
-
-      // Cooldown
-      const now = Date.now();
-      if (now - lastJumpTime < 600) {
-        lastScrollLeft = currentScrollLeft;
-        return;
-      }
-
-      // Use requestAnimationFrame
+      // Use requestAnimationFrame for smooth processing
       if (rafId) {
         cancelAnimationFrame(rafId);
       }
@@ -142,37 +92,60 @@ function Carousel<T extends { id: string }>({
         }
         
         const setWidth = items.length * itemWidth;
-        const originalItemsStart = setWidth;
-        const appendedBufferStart = setWidth * 2;
+        // With 5 sets: [prepend2][prepend1][original][append1][append2]
+        // Set boundaries:
+        const prepend2Start = 0;
+        const prepend1Start = setWidth;
+        // originalStart = setWidth * 2 (not used directly in logic)
+        // append1Start = setWidth * 3 (not used directly in logic)
+        const append2Start = setWidth * 4;
 
-        // Only check boundaries if we're actually moving
+        // Detect scroll direction
         const scrollingRight = scrollLeft > lastScrollLeft;
         const scrollingLeft = scrollLeft < lastScrollLeft;
-        
-        if (!scrollingRight && !scrollingLeft) {
-          lastScrollLeft = scrollLeft;
-          return;
-        }
 
-        // Calculate position within set
+        // Calculate position within set using modulo for seamless mapping
         const positionInSet = scrollLeft % setWidth;
 
-        // Only jump when we're well into the boundary sets
-        // This prevents premature jumps that cause erratic behavior
-        const jumpThreshold = setWidth * 0.3; // 30% into the set
-
-        // Jump from third set to first set when scrolling right
-        // Only if we're past the threshold in the third set (well into the third set)
-        if (scrollLeft >= appendedBufferStart + jumpThreshold && scrollingRight) {
-          performJump(positionInSet);
+        // Jump from append2 to prepend1 when scrolling right
+        // Trigger when entering second half of append2 to ensure smooth jump
+        const append2MidPoint = append2Start + (setWidth / 2);
+        if (scrollLeft >= append2MidPoint && scrollingRight) {
+          isLoopingRef.current = true;
+          
+          // Jump to same relative position in prepend1
+          const newPosition = prepend1Start + positionInSet;
+          carousel.scrollLeft = newPosition;
+          lastScrollLeft = newPosition;
+          
+          if (loopTimeoutId) {
+            clearTimeout(loopTimeoutId);
+          }
+          loopTimeoutId = setTimeout(() => {
+            isLoopingRef.current = false;
+            loopTimeoutId = null;
+          }, 100);
           return;
         }
         
-        // Jump from first set to third set when scrolling left
-        // Only if we're in the first set and past the threshold (well into the first set from the start)
-        // This means we're near the end of the first set, ready to loop back
-        if (scrollLeft < originalItemsStart && scrollLeft >= jumpThreshold && scrollingLeft) {
-          performJump(appendedBufferStart + positionInSet);
+        // Jump from prepend1 to append2 when scrolling left
+        // Trigger when entering second half of prepend1 (scrolling leftward into it)
+        const prepend1MidPoint = prepend1Start + (setWidth / 2);
+        if (scrollLeft < prepend1MidPoint && scrollLeft >= prepend2Start && scrollingLeft) {
+          isLoopingRef.current = true;
+          
+          // Jump to same relative position in append2
+          const newPosition = append2Start + positionInSet;
+          carousel.scrollLeft = newPosition;
+          lastScrollLeft = newPosition;
+          
+          if (loopTimeoutId) {
+            clearTimeout(loopTimeoutId);
+          }
+          loopTimeoutId = setTimeout(() => {
+            isLoopingRef.current = false;
+            loopTimeoutId = null;
+          }, 100);
           return;
         }
 
@@ -226,16 +199,18 @@ function Carousel<T extends { id: string }>({
     );
   }
 
-  // Create infinite loop using exactly 3 full iterations:
-  // 1. First iteration (prepended) - full set of items
-  // 2. Second iteration (original) - full set of items (this is where we start)
-  // 3. Third iteration (appended) - full set of items
-  // This ensures consistent behavior regardless of item count
-  const bufferedItems = [...items, ...items, ...items];
+  // Create infinite loop using exactly 5 full iterations:
+  // 1. Prepend2 - full set of items (buffer for scrolling left)
+  // 2. Prepend1 - full set of items (buffer for scrolling left)
+  // 3. Original - full set of items (this is where we start)
+  // 4. Append1 - full set of items (buffer for scrolling right)
+  // 5. Append2 - full set of items (buffer for scrolling right)
+  // This ensures smooth infinite scrolling with enough buffer on both sides
+  const bufferedItems = [...items, ...items, ...items, ...items, ...items];
   
   // Calculate positions for tracking
-  // Original items start at index = items.length (middle set)
-  const originalItemsStart = items.length;
+  // Original items start at index = items.length * 2 (middle set)
+  const originalItemsStart = items.length * 2;
 
   return (
     <div
