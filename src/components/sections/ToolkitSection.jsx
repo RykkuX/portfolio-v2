@@ -120,7 +120,7 @@ const ToolkitSection = () => {
         setIsInView(entry.isIntersecting);
       },
       {
-        threshold: 0.3, // Trigger when 30% of section is visible
+        threshold: 0.5, // Trigger when 30% of section is visible
         rootMargin: '0px'
       }
     );
@@ -145,7 +145,7 @@ const ToolkitSection = () => {
         <div className="relative overflow-hidden rounded-3xl shadow-2xl">
           {/* Left Door Panel */}
           <div 
-            className={`absolute top-0 bottom-0 left-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-all duration-[1500ms] ease-in-out origin-right rounded-l-3xl ${
+            className={`absolute top-0 bottom-0 left-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-all duration-[3000ms] ease-in-out origin-right rounded-l-3xl ${
               isInView ? '-translate-x-full shadow-2xl' : 'translate-x-0 shadow-md'
             }`}
             style={{ transformStyle: 'preserve-3d' }}
@@ -162,7 +162,7 @@ const ToolkitSection = () => {
           
           {/* Right Door Panel */}
           <div 
-            className={`absolute top-0 bottom-0 right-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-all duration-[1500ms] ease-in-out origin-left rounded-r-3xl ${
+            className={`absolute top-0 bottom-0 right-0 w-1/2 bg-accent-yellow border-4 border-black z-20 transition-all duration-[3000ms] ease-in-out origin-left rounded-r-3xl ${
               isInView ? 'translate-x-full shadow-2xl' : 'translate-x-0 shadow-md'
             }`}
             style={{ transformStyle: 'preserve-3d' }}
