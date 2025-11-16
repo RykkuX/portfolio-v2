@@ -51,18 +51,22 @@ const ContactSection: React.FC = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-10">
-            <button
-              className="bg-accent-yellow text-primary-dark px-8 py-4 font-mono font-bold text-mobile-body md:text-medium-body lg:text-body hover:bg-accent-bright-yellow transition-colors duration-300 w-64 min-w-[16rem] text-center"
+            <a
+              href="mailto:llycosauza@gmail.com"
+              className="bg-accent-yellow text-primary-dark px-8 py-4 font-mono font-bold text-mobile-body md:text-medium-body lg:text-body hover:bg-accent-bright-yellow transition-colors duration-300 w-64 min-w-[16rem] text-center inline-block"
               style={{ minWidth: '16rem', maxWidth: '16rem' }}
             >
               SEND ME AN EMAIL
-            </button>
-            <button
-              className="bg-accent-yellow text-primary-dark px-8 py-4 font-mono font-bold text-mobile-body md:text-medium-body lg:text-body hover:bg-accent-bright-yellow transition-colors duration-300 w-64 min-w-[16rem] text-center"
+            </a>
+            <a
+              href="https://calendly.com/llycosauza"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-accent-yellow text-primary-dark px-8 py-4 font-mono font-bold text-mobile-body md:text-medium-body lg:text-body hover:bg-accent-bright-yellow transition-colors duration-300 w-64 min-w-[16rem] text-center inline-block"
               style={{ minWidth: '16rem', maxWidth: '16rem' }}
             >
               BOOK A CALL
-            </button>
+            </a>
           </div>
 
         </div>

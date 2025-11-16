@@ -57,9 +57,14 @@ const ServicesSection: React.FC = () => {
 
           {/* Call to Action Button */}
           <div className="flex justify-end mt-20">
-            <button className="bg-accent-yellow text-primary-dark px-6 py-3 rounded font-inter font-medium text-mobile-body md:text-medium-body lg:text-body hover:bg-accent-bright-yellow transition-colors duration-300">
+            <a
+              href="https://calendly.com/llycosauza"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-accent-yellow text-primary-dark px-6 py-3 rounded font-inter font-medium text-mobile-body md:text-medium-body lg:text-body hover:bg-accent-bright-yellow transition-colors duration-300 inline-block"
+            >
               Let's Talk
-            </button>
+            </a>
           </div>
 
         </div>
