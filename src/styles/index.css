@@ -38,3 +38,45 @@
     scroll-snap-stop: always;
   }
 }
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* 3D Transform utilities */
+  .perspective-\[4000px\] {
+    perspective: 4000px;
+  }
+  
+  .perspective-origin-top-right {
+    perspective-origin: top right;
+  }
+  
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .rotate-x-\[47deg\] {
+    transform: rotateX(47deg);
+  }
+  
+  .rotate-y-\[31deg\] {
+    transform: rotateY(31deg);
+  }
+  
+  .rotate-\[324deg\] {
+    transform: rotate(324deg);
+  }
+  
+  .rounded-4xl {
+    border-radius: 2rem;
+  }
+}

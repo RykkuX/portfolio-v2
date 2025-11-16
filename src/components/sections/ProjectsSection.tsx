@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { typographyClasses, colorClasses } from '../../utils/typography';
-import { useSmoothScroll } from '../hooks/useSmoothScroll';
-
+import Carousel from '../common/Carousel';
 
 interface Project {
   id: string;
@@ -19,12 +18,12 @@ const ProjectsSection: React.FC = () => {
   const projects: Project[] = [
     {
       id: '1',
-      title: 'THRIBO Mobile APP',
-      technologies: ['JavaScript', 'ReactJS', 'Azure'],
-      websiteUrl: 'https://thribo-web-app.com',
-      imageUrl: '/placeholder-project-1.jpg',
-      description: 'A comprehensive web application for digital marketing solutions',
-      category: 'Mobile Application'   
+      title: 'Proventous Platform',
+      technologies: ['Laravel', 'React', 'PHP', 'MySQL', 'REST API'],
+      websiteUrl: 'https://proventous.com/',
+      imageUrl: '/Proventous.png',
+      description: 'A Laravel-based application with React frontend for the Proventous platform. The project handles candidate management, employer dashboards, and various business operations. As System Design Architect and Full Stack Developer, I designed the scalable system architecture, implemented secure authentication and authorization systems, built RESTful APIs for seamless frontend-backend communication, and developed responsive React components for candidate and employer dashboards.',
+      category: 'Web Application'   
     },
     {
       id: '2',
@@ -56,32 +55,134 @@ const ProjectsSection: React.FC = () => {
     }
   ];
 
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+
+  const activeProject = projects[activeProjectIndex];
+
   return (
-    <section id="projects" className="snap-section min-h-screen bg-primary-dark text-white py-16 sm:py-20 lg:py-24">
-      <div className="w-full max-w-4xl sm:max-w-5xl lg:max-w-6xl xl:max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-        
-        {/* Section Header */}
-        <div className="mb-12 sm:mb-16 lg:mb-20">
-          <h2 className={`${typographyClasses.responsiveH2} ${colorClasses.accent} text-center sm:text-left mb-4`}>
-            Recent Works
-          </h2>
-          <p className={`${typographyClasses.responsiveBody} ${colorClasses.primary} text-center sm:text-left max-w-3xl`}>
-            Explore my latest projects showcasing web development, data analytics, and innovative solutions.
+    <section id="projects" className="snap-section min-h-screen bg-primary-dark text-white py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+      {/* 3D Background Image Layer */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="min-[600px]:-mt-16 perspective-[4000px] perspective-origin-top-right transform-3d relative h-full">
+          <div 
+            className="relative transition-opacity duration-500"
+            style={{
+              transform: 'scale(1.5) rotateX(47deg) rotateY(31deg) rotate(324deg) translateX(25%)',
+            }}
+          >
+            <div className="relative">
+              {/* Project Image */}
+              <div className="border-2 border-[#171717] rounded-4xl overflow-hidden bg-secondary-dark transition-all duration-500">
+                {activeProject.imageUrl && !activeProject.imageUrl.includes('placeholder') ? (
+                  <img
+                    src={activeProject.imageUrl}
+                    alt={activeProject.title}
+                    className="w-full h-96 object-cover transition-opacity duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-96 bg-gradient-to-br from-secondary-dark via-accent-blue to-primary-dark flex items-center justify-center">
+                    <div className="text-center text-gray-400 transition-all duration-500">
+                      <div className="text-6xl mb-4">📱</div>
+                      <p className={`${typographyClasses.responsiveBody} text-gray-500`}>
+                        {activeProject.title}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 w-[200%] size-full bg-gradient-to-r from-primary-dark via-primary-dark/80 to-transparent pointer-events-none"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Content Layer */}
+      <div className="relative z-10 w-full min-h-screen">
+        {/* Container with responsive padding matching Figma spacing */}
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-[148px] py-12 sm:py-16 md:py-20 lg:py-24">
+          {/* Top Row: "Projects" label and "Visit >" link */}
+          <div className="flex items-start justify-between mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+            {/* "Projects" Label - Figma: font-size:24px, font-weight:500, color:#FFD60A */}
+            <h2 
+              className="font-roboto-mono font-medium text-[#FFD60A] transition-all duration-500"
+              style={{
+                fontSize: 'clamp(20px, 2vw, 24px)',
+              }}
+            >
+              Projects
+            </h2>
+
+            {/* "Visit >" Link - Figma: font-size:16px, font-weight:500, color:#FFC300 */}
+            {activeProject.websiteUrl && (
+              <a
+                href={activeProject.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-roboto-mono font-medium text-[#FFC300] hover:text-[#FFD60A] transition-colors duration-200 underline"
+                style={{
+                  fontSize: 'clamp(14px, 1.5vw, 16px)',
+                }}
+              >
+                Visit &gt;
+              </a>
+            )}
+          </div>
+
+          {/* Project Title - Figma: font-size:24px, font-weight:500 */}
+          <h3 
+            className="font-roboto-mono font-medium text-white mb-4 sm:mb-6 md:mb-8 transition-all duration-500"
+            style={{
+              fontSize: 'clamp(20px, 2vw, 24px)',
+            }}
+          >
+            {activeProject.title}
+          </h3>
+
+          {/* Description - Figma: font-size:18px, font-weight:700, max-width:962px */}
+          <p 
+            className="font-inter font-bold text-white leading-normal mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-4xl transition-all duration-500"
+            style={{
+              fontSize: 'clamp(16px, 1.8vw, 18px)',
+            }}
+          >
+            {activeProject.description}
           </p>
-        </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+          {/* Tech Stack Labels - Figma: font-size:16px, font-weight:500, color:#FFC300 */}
+          <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              {activeProject.technologies.map((tech, index) => (
+                <span
+                  key={index}
+                  className="font-roboto-mono font-medium text-[#FFC300]"
+                  style={{
+                    fontSize: 'clamp(14px, 1.5vw, 16px)',
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
 
-        {/* View All Projects Button */}
-        <div className="mt-12 sm:mt-16 lg:mt-20 text-center">
-          <button className="border-2 border-accent-yellow text-accent-yellow px-8 sm:px-10 py-3 sm:py-4 rounded-lg font-inter text-sm sm:text-base lg:text-link hover:bg-accent-yellow hover:text-primary-dark transition-all duration-300 transform hover:scale-105">
-            VIEW ALL PROJECTS
-          </button>
+          {/* Carousel Container - Positioned below tech stack with proper spacing */}
+          <div className="relative -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-[148px] px-4 sm:px-6 md:px-8 lg:px-[148px] mt-8 sm:mt-10 md:mt-12 lg:mt-16">
+            <Carousel
+              items={projects}
+              onActiveIndexChange={setActiveProjectIndex}
+              renderItem={(project, index, isActive) => (
+                <ProjectCard
+                  project={project}
+                  isActive={isActive}
+                  onClick={() => {
+                    // Click handling is managed by Carousel component
+                  }}
+                />
+              )}
+              itemClassName="flex-shrink-0 cursor-pointer snap-start"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -90,93 +191,104 @@ const ProjectsSection: React.FC = () => {
 
 interface ProjectCardProps {
   project: Project;
+  isActive: boolean;
+  onClick: () => void;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, isActive, onClick }) => {
   return (
-    <div className="bg-secondary-dark rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
-      
-      {/* Project Preview/Thumbnail */}
-      <div className="bg-white p-4 sm:p-6">
-        <div className="space-y-4">
-          {/* Mini Navigation Bar */}
-          <div className="flex items-center justify-between text-xs sm:text-sm text-gray-600 border-b border-gray-200 pb-2">
-            <div className="flex items-center space-x-4">
-              <span className="font-medium">Home</span>
-              <span>About Us</span>
-              <span>Services</span>
-              <span>Feature Projects</span>
-            </div>
-            <button className="bg-blue-500 text-white px-3 py-1 rounded text-xs">Contact</button>
-          </div>
-
-          {/* Main Content */}
-          <div className="space-y-3">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-800">
-              {project.title}
-            </h3>
-            <p className="text-sm text-gray-600">
-              {project.description}
-            </p>
-            
-            {/* Placeholder Image */}
-            <div className="bg-gray-200 h-32 sm:h-40 rounded-lg flex items-center justify-center">
+    <div
+      onClick={onClick}
+      className={`
+        w-[320px] sm:w-[384px] md:w-[400px] lg:w-[420px]
+        transition-all duration-300
+        ${isActive ? 'scale-105' : 'scale-100 opacity-70'}
+      `}
+    >
+      <div
+        className={`
+          bg-primary-dark border-2 rounded-lg p-6 h-full
+          transition-all duration-300
+          ${isActive ? 'border-accent-yellow shadow-lg shadow-accent-yellow/20' : 'border-secondary-dark'}
+        `}
+      >
+          {/* Project Image */}
+          <div className="mb-6 bg-secondary-dark rounded-lg overflow-hidden aspect-video flex items-center justify-center">
+            {project.imageUrl && !project.imageUrl.includes('placeholder') ? (
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+            ) : (
               <div className="text-center text-gray-500">
                 <div className="text-4xl mb-2">📱</div>
-                <p className="text-sm">Project Preview</p>
-                <p className="text-xs">{project.title}</p>
+                <p className={`${typographyClasses.responsiveCaption} text-gray-600`}>
+                  {project.title}
+                </p>
               </div>
-            </div>
-
-            {/* Sub-sections */}
-            <div className="grid grid-cols-3 gap-2 text-xs">
-              <div className="bg-gray-50 p-2 rounded text-center">
-                <div className="text-blue-500 mb-1">+</div>
-                <p className="text-gray-700">Feature 1</p>
-              </div>
-              <div className="bg-gray-50 p-2 rounded text-center">
-                <div className="text-blue-500 mb-1">+</div>
-                <p className="text-gray-700">Feature 2</p>
-              </div>
-              <div className="bg-gray-50 p-2 rounded text-center">
-                <div className="text-blue-500 mb-1">+</div>
-                <p className="text-gray-700">Feature 3</p>
-              </div>
-            </div>
+            )}
           </div>
-        </div>
-      </div>
 
-      {/* Project Details */}
-      <div className="bg-accent-blue p-4 sm:p-6">
-        <div className="space-y-4">
           {/* Project Title */}
-          <h3 className={`${typographyClasses.responsiveH5} text-white font-bold`}>
+          <h4
+            className={`
+              ${typographyClasses.responsiveH5} ${colorClasses.accent} mb-3
+              transition-colors duration-300
+            `}
+          >
             {project.title}
-          </h3>
+          </h4>
 
-          {/* Technologies */}
-          <div className="flex flex-wrap gap-2">
+          {/* Description */}
+          <p
+            className={`
+              ${typographyClasses.responsiveBody} ${colorClasses.muted} mb-4
+              overflow-hidden
+            `}
+            style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+            }}
+          >
+            {project.description}
+          </p>
+
+          {/* Tech Tags */}
+          <div className="flex flex-wrap gap-2 mb-4">
             {project.technologies.map((tech, index) => (
               <span
                 key={index}
-                className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full"
+                className={`
+                  ${typographyClasses.responsiveCaption}
+                  px-3 py-1 rounded-full
+                  border border-accent-yellow/30 text-accent-yellow
+                  bg-accent-yellow/10
+                  transition-all duration-200
+                  ${isActive ? 'border-accent-yellow bg-accent-yellow/20' : ''}
+                `}
               >
                 {tech}
               </span>
             ))}
           </div>
 
-          {/* Call to Action Links */}
+          {/* Links */}
           <div className="flex flex-wrap gap-4 pt-2">
             {project.websiteUrl && (
               <a
                 href={project.websiteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${typographyClasses.responsiveLink} ${colorClasses.accent} hover:text-accent-bright-yellow transition-colors duration-200 underline`}
+                onClick={(e) => e.stopPropagation()}
+                className={`
+                  ${typographyClasses.responsiveLink} ${colorClasses.accent}
+                  hover:text-accent-bright-yellow transition-colors duration-200
+                  underline
+                `}
               >
-                see website &gt;
+                Visit &gt;
               </a>
             )}
             {project.codebaseUrl && (
@@ -184,16 +296,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 href={project.codebaseUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${typographyClasses.responsiveLink} ${colorClasses.accent} hover:text-accent-bright-yellow transition-colors duration-200 underline`}
+                onClick={(e) => e.stopPropagation()}
+                className={`
+                  ${typographyClasses.responsiveLink} ${colorClasses.accent}
+                  hover:text-accent-bright-yellow transition-colors duration-200
+                  underline
+                `}
               >
-                see codebase &gt;
+                Codebase &gt;
               </a>
             )}
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default ProjectsSection; 
