@@ -1,24 +1,74 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { typographyClasses, combinedClasses } from "../utils/typography";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const AboutMe: React.FC = () => {
   const navigate = useNavigate();
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   const handleBackToHome = () => {
     navigate("/");
   };
 
+  const handleDownloadPDF = async () => {
+    if (!contentRef.current) return;
+    
+    setIsGeneratingPDF(true);
+    
+    try {
+      // Capture the content as canvas
+      const canvas = await html2canvas(contentRef.current, {
+        scale: 2, // Higher quality
+        useCORS: true, // Handle cross-origin images
+        logging: false,
+        backgroundColor: "#001020",
+      });
+
+      // Calculate dimensions (landscape orientation)
+      const imgWidth = 297; // A4 width in mm (landscape)
+      const pageHeight = 210; // A4 height in mm (landscape)
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      // Create PDF (landscape orientation)
+      const pdf = new jsPDF("l", "mm", "a4");
+      const imgData = canvas.toDataURL("image/png");
+
+      // Add first page
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      // Add additional pages if content is longer than one page
+      while (heightLeft > 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      // Download the PDF
+      pdf.save("John_Llyco_Sauza_Resume.pdf");
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-primary-dark text-white p-6">
-      <div className="max-w-7xl mx-auto grid gap-6 grid-cols-1 lg:grid-cols-12 auto-rows-max">
+      <div ref={contentRef} className="max-w-7xl mx-auto grid gap-6 grid-cols-1 lg:grid-cols-12 auto-rows-max">
         {/* Nav */}
         <nav className="col-span-full flex justify-start">
           <button 
             onClick={handleBackToHome}
-            className={`${typographyClasses.aboutmeBody} hover:opacity-80 transition-opacity duration-200 cursor-pointer`}
+            className={`${typographyClasses.aboutmeBody} hover:opacity-80 transition-opacity duration-200 cursor-pointer mb-10`}
           >
-            back to home.
+
           </button>
         </nav>
 
@@ -263,7 +313,13 @@ const AboutMe: React.FC = () => {
         {/* Footer */}
         <footer className="col-span-full flex justify-between items-center pt-6 border-t border-primary-dark/30">
           <p className={typographyClasses.aboutmeBody}>Llyco Sauza 2025.</p>
-          <button className={typographyClasses.aboutmeBody}>Download as PDF</button>
+          <button 
+            onClick={handleDownloadPDF}
+            disabled={isGeneratingPDF}
+            className={`${typographyClasses.aboutmeBody} hover:opacity-80 transition-opacity duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
+          >
+            {isGeneratingPDF ? "Generating PDF..." : "Download as PDF"}
+          </button>
         </footer>
       </div>
     </div>
