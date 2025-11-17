@@ -210,6 +210,7 @@ const Header: React.FC = () => {
               </a>
               <Link
                 to="/resume"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={`${typographyClasses.responsiveCaption} ${colorClasses.primary} uppercase tracking-wide text-left hover:text-accent-yellow transition-colors duration-200 py-2`}
               >
                 RESUME
