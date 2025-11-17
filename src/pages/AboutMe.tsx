@@ -127,6 +127,7 @@ const AboutMe: React.FC = () => {
               <h2 className={typographyClasses.aboutmeH3}>Certifications</h2>
               <ul className="space-y-2 mt-4">
                 {[
+                  "DICT CyberRange 2025",
                   "TOPCIT Competency Certified",
                   "Penetration Testing Specialist HackTheBox",
                   "Civil Service Professional Level",
