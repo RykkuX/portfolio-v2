@@ -18,12 +18,12 @@ const ProjectsSection: React.FC = () => {
   const projects: Project[] = [
     {
       id: '1',
-      title: 'Proventous Platform',
-      technologies: ['Laravel', 'React', 'PHP', 'MySQL'],
-      websiteUrl: 'https://proventous.com/',
-      imageUrl: '/Proventous.png',
-      description: 'A Laravel-based application with React frontend for the Proventous platform. The project handles candidate management, employer dashboards, and various business operations. As System Design Architect and Full Stack Developer, I designed the scalable system architecture, implemented secure authentication and authorization systems, built RESTful APIs for seamless frontend-backend communication, and developed responsive React components for candidate and employer dashboards.',
-      category: 'Web Application'   
+      title: 'Project Access Granted',
+      technologies: ['React', 'Next.js', 'Cybersecurity'],
+      websiteUrl: 'https://project-ag.org/',
+      imageUrl: '/Project AG.png',
+      description: 'Project Access Granted (Project-AG) is a Cyber Security Group established in Iloilo City. A collective of passionate professionals in cybersecurity, software development, and IT innovation. The platform showcases the team, achievements, and community initiatives. As Co-Founder, I helped establish the organization and develop the web presence for our cybersecurity community.',
+      category: 'Cybersecurity'
     },
     {
       id: '2',
@@ -54,12 +54,21 @@ const ProjectsSection: React.FC = () => {
     },
     {
       id: '5',
-      title: 'Project Access Granted',
-      technologies: ['React', 'Next.js', 'Cybersecurity'],
-      websiteUrl: 'https://project-ag.org/',
-      imageUrl: '/Project AG.png',
-      description: 'Project Access Granted (Project-AG) is a Cyber Security Group established in Iloilo City. A collective of passionate professionals in cybersecurity, software development, and IT innovation. The platform showcases the team, achievements, and community initiatives. As Co-Founder, I helped establish the organization and develop the web presence for our cybersecurity community.',
-      category: 'Cybersecurity'
+      title: 'Proventous Platform',
+      technologies: ['Laravel', 'React', 'PHP', 'MySQL'],
+      websiteUrl: 'https://proventous.com/',
+      imageUrl: '/Proventous.png',
+      description: 'A Laravel-based application with React frontend for the Proventous platform. The project handles candidate management, employer dashboards, and various business operations. As System Design Architect and Full Stack Developer, I designed the scalable system architecture, implemented secure authentication and authorization systems, built RESTful APIs for seamless frontend-backend communication, and developed responsive React components for candidate and employer dashboards.',
+      category: 'Web Application'   
+    },
+    {
+      id: '6',
+      title: 'ISATech Society',
+      technologies: ['JavaScript', 'Next.js', 'CSS'],
+      websiteUrl: 'https://www.isatech.club/',
+      imageUrl: '/isatech.png',
+      description: 'ISATech Society (ISAT U Innovators and Technopreneurs Society) is a student-led organization at Iloilo Science and Technology University dedicated to nurturing innovation, creativity, and entrepreneurship.',
+      category: 'Startup'
     }
   ];
 
